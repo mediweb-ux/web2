@@ -22,13 +22,7 @@ const config = {
 		prerender: {
 			handleHttpError: 'warn',
 			handleMissingId: 'warn',
-			entries: [
-				'*', // Prerender all discoverable pages
-				'/services/web-development',
-				'/services/medical-services', 
-				'/services/courses',
-				'/contact'
-			],
+			entries: ['*'],
 			crawl: true
 		},
 

@@ -7,8 +7,8 @@
 	import Icon from '$lib/components/ui/Icon.svelte';
 
 	const breadcrumbItems = [
-		{ label: 'Home', href: '/' },
-		{ label: 'About', href: '/about' }
+		{ label: 'Hjem', href: '/' },
+		{ label: 'Om oss', href: '/om-oss' }
 	];
 
 	const teamMembers = [
@@ -57,9 +57,9 @@
 </script>
 
 <SEO
-	title="About Us - Professional Digital Agency"
-	description="Learn about our team, mission, and values. We're a digital agency specializing in web development, medical services, and educational platforms."
-	keywords={['about us', 'digital agency', 'team', 'mission', 'values']}
+	title="MediWeb - Om oss"
+	description="Les mer om firmaet og hvordan alt startet. Vi er et spesielt firma, med tre ulike kompetanseområder."
+	keywords={['om oss', 'digitalt byrå', 'team', 'legetjenester', 'kurs']}
 />
 
 <!-- Breadcrumb Navigation -->
@@ -71,7 +71,7 @@
 <Section className="py-16 lg:py-24">
 	<div class="text-center max-w-4xl mx-auto">
 		<h1 class="text-4xl lg:text-6xl font-bold tracking-tight mb-6">
-			About Our Agency
+			Om oss
 		</h1>
 		<p class="text-xl text-muted-foreground mb-8 leading-relaxed">
 			We're a passionate team of developers, designers, and consultants dedicated to creating 

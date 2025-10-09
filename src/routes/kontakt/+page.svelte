@@ -38,13 +38,12 @@
 />
 
 <!-- Hero Section -->
-<Section
-	className="bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800"
-	ariaLabel="Innledning"
->
-	<div class="max-w-4xl mx-auto text-center">
-		<h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">Kontakt</h1>
-		<p class="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
+<Section className="py-16 lg:py-24" ariaLabel="Innledning">
+	<div class="text-center max-w-4xl mx-auto">
+		<h1 class="text-4xl lg:text-5xl font-bold text-foreground mb-6">
+			Kontakt oss
+		</h1>
+		<p class="text-xl text-muted-foreground mb-8 leading-relaxed">
 			Klar til &aring; starte ditt prosjekt? Vi vil gjerne h&oslash;re fra deg, ta kontakt s&aring;
 			kan vi snakkes!
 		</p>
@@ -52,25 +51,25 @@
 </Section>
 
 <!-- Contact Content -->
-<Section>
+<Section className="py-16 bg-muted/30" ariaLabel="Kontakt innhold">
 	<div class="max-w-6xl mx-auto">
 		<div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
 			<!-- Contact Form -->
 			<div>
-				<h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Send en melding</h2>
+				<h2 class="text-2xl font-bold text-foreground mb-6">Send en melding</h2>
 				<ContactForm {selectedService} />
 			</div>
 
 			<!-- Contact Information -->
 			<div>
-				<h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Kontaktinformasjon</h2>
+				<h2 class="text-2xl font-bold text-foreground mb-6">Kontaktinformasjon</h2>
 
 				<div class="space-y-6">
 					<!-- Email -->
 					<div class="flex items-start space-x-4">
 						<div class="flex-shrink-0">
 							<svg
-								class="w-6 h-6 text-blue-600 dark:text-blue-400"
+								class="w-6 h-6 text-primary"
 								fill="none"
 								stroke="currentColor"
 								viewBox="0 0 24 24"
@@ -85,10 +84,10 @@
 							</svg>
 						</div>
 						<div>
-							<h3 class="text-lg font-medium text-gray-900 dark:text-white">E-post</h3>
+							<h3 class="text-lg font-medium text-foreground">E-post</h3>
 							<a
 								href="mailto:{contactInfo.email}"
-								class="text-blue-600 dark:text-blue-400 hover:underline focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded"
+								class="text-primary hover:underline focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 rounded"
 								aria-label="Send epost til {contactInfo.email}"
 							>
 								{contactInfo.email}
@@ -100,7 +99,7 @@
 					<div class="flex items-start space-x-4">
 						<div class="flex-shrink-0">
 							<svg
-								class="w-6 h-6 text-blue-600 dark:text-blue-400"
+								class="w-6 h-6 text-primary"
 								fill="none"
 								stroke="currentColor"
 								viewBox="0 0 24 24"
@@ -121,8 +120,8 @@
 							</svg>
 						</div>
 						<div>
-							<h3 class="text-lg font-medium text-gray-900 dark:text-white">Adressw</h3>
-							<address class="text-gray-600 dark:text-gray-300 not-italic">
+							<h3 class="text-lg font-medium text-foreground">Adresse</h3>
+							<address class="text-muted-foreground not-italic">
 								{contactInfo.address.street}<br />
 								{contactInfo.address.zip}
 								{contactInfo.address.city}
@@ -132,11 +131,11 @@
 				</div>
 
 				<!-- Additional Information -->
-				<div class="mt-8 p-6 bg-gray-50 dark:bg-gray-800 rounded-lg">
-					<h3 class="text-lg font-medium text-gray-900 dark:text-white mb-3">
+				<div class="mt-8 p-6 bg-card border border-border rounded-lg">
+					<h3 class="text-lg font-medium text-foreground mb-3">
 						Hva du kan forvente
 					</h3>
-					<ul class="space-y-2 text-gray-600 dark:text-gray-300">
+					<ul class="space-y-2 text-muted-foreground">
 						<li class="flex items-start space-x-2">
 							<svg
 								class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0"
@@ -180,7 +179,7 @@
 									clip-rule="evenodd"
 								/>
 							</svg>
-							<span>Ingen </span>
+							<span>Ingen forpliktelser eller skjulte kostnader</span>
 						</li>
 					</ul>
 				</div>

@@ -15,16 +15,16 @@
 		{#each items as item, index}
 			<li class="flex items-center">
 				{#if index > 0}
-					<Icon name="chevron-right" size="sm" class="text-muted-foreground mx-2" />
+					<Icon name="chevron-right" size="xs" class="text-muted-foreground mx-2" />
 				{/if}
-				
+
 				{#if item.current}
 					<span class="text-foreground font-medium" aria-current="page">
 						{item.label}
 					</span>
 				{:else}
-					<a 
-						href={item.href} 
+					<a
+						href={item.href}
 						class="text-muted-foreground hover:text-foreground transition-colors duration-200"
 					>
 						{item.label}
