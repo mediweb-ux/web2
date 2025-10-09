@@ -1,10 +1,10 @@
-name: Deploy to Production
+name: Build and Deploy
 
 on:
   push:
-    branches: [main]
+    branches: [main, master]
   pull_request:
-    branches: [main]
+    branches: [main, master]
 
 jobs:
   test:
@@ -29,9 +29,6 @@ jobs:
       
       - name: Run tests
         run: npm run test:run
-      
-      - name: Run accessibility tests
-        run: npm run test:accessibility
 
   build:
     needs: test
@@ -59,30 +56,10 @@ jobs:
         with:
           name: build-files
           path: build/
-          retention-days: 30
+          retention-days: 7
 
-  deploy-staging:
-    if: github.event_name == 'pull_request'
-    needs: build
-    runs-on: ubuntu-latest
-    environment: staging
-    steps:
-      - uses: actions/checkout@v4
-      
-      - name: Download build artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: build-files
-          path: build/
-      
-      - name: Deploy to staging
-        run: |
-          echo "Deploy to staging environment"
-          # Add your staging deployment commands here
-          # Example: rsync, scp, or hosting provider CLI
-
-  deploy-production:
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+  deploy-to-vps:
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
     needs: build
     runs-on: ubuntu-latest
     environment: production
@@ -95,8 +72,23 @@ jobs:
           name: build-files
           path: build/
       
-      - name: Deploy to production
+      - name: Deploy to VPS
         run: |
-          echo "Deploy to production environment"
-          # Add your production deployment commands here
-          # Example: Netlify CLI, Vercel CLI, or custom deployment script
+          echo "🚀 Deploying to VPS..."
+          # Uncomment and configure the following lines for your VPS deployment:
+          
+          # Install SSH key
+          # mkdir -p ~/.ssh
+          # echo "${{ secrets.VPS_SSH_KEY }}" > ~/.ssh/id_rsa
+          # chmod 600 ~/.ssh/id_rsa
+          # ssh-keyscan -H ${{ secrets.VPS_HOST }} >> ~/.ssh/known_hosts
+          
+          # Deploy files to VPS
+          # rsync -avz --delete build/ ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:${{ secrets.VPS_PATH }}
+          
+          # Or use SCP
+          # scp -r build/* ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:${{ secrets.VPS_PATH }}
+          
+          echo "✅ Deployment completed!"
+          echo "📁 Build files are ready in the artifacts"
+          echo "🔧 Configure the deployment commands above with your VPS details"

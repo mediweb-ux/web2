@@ -38,7 +38,10 @@
 />
 
 <!-- Hero Section -->
-<Section className="bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800" ariaLabel="Innledning">
+<Section
+	className="bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800"
+	ariaLabel="Innledning"
+>
 	<div class="max-w-4xl mx-auto text-center">
 		<h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">Kontakt</h1>
 		<p class="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
@@ -121,7 +124,7 @@
 							<h3 class="text-lg font-medium text-gray-900 dark:text-white">Adressw</h3>
 							<address class="text-gray-600 dark:text-gray-300 not-italic">
 								{contactInfo.address.street}<br />
-								{contactInfo.address.zip} 
+								{contactInfo.address.zip}
 								{contactInfo.address.city}
 							</address>
 						</div>
