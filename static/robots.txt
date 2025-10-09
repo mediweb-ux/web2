@@ -1,0 +1,15 @@
+# Robots.txt for Agency Website
+User-agent: *
+Allow: /
+
+# Disallow admin and private areas (if any exist in the future)
+Disallow: /admin/
+Disallow: /api/
+Disallow: /_app/
+Disallow: /.well-known/
+
+# Allow all search engines to crawl the sitemap
+Sitemap: https://agency.com/sitemap.xml
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 1

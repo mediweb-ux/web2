@@ -1,0 +1,280 @@
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import {
+	createLazyObserver,
+	lazyLoadImage,
+	lazyLoadContent,
+	isLazyLoadingSupported,
+	getLoadingStrategy
+} from './lazy-loading';
+
+// Mock IntersectionObserver
+const mockIntersectionObserver = vi.fn();
+const mockObserve = vi.fn();
+const mockUnobserve = vi.fn();
+const mockDisconnect = vi.fn();
+
+mockIntersectionObserver.mockImplementation((callback: IntersectionObserverCallback) => ({
+	observe: mockObserve,
+	unobserve: mockUnobserve,
+	disconnect: mockDisconnect,
+	callback
+}));
+
+// Mock HTMLImageElement
+const mockImage = {
+	src: '',
+	srcset: '',
+	dataset: {
+		src: '/test-image.jpg',
+		srcset: '/test-image-320w.jpg 320w, /test-image-640w.jpg 640w'
+	},
+	classList: {
+		add: vi.fn(),
+		remove: vi.fn()
+	},
+	removeAttribute: vi.fn()
+};
+
+// Mock HTMLElement
+const mockElement = {
+	classList: {
+		add: vi.fn(),
+		remove: vi.fn()
+	},
+	dispatchEvent: vi.fn()
+};
+
+beforeEach(() => {
+	vi.clearAllMocks();
+	
+	// Set up global mocks
+	global.window = {
+		IntersectionObserver: mockIntersectionObserver
+	} as any;
+
+	global.IntersectionObserver = mockIntersectionObserver;
+	global.CustomEvent = vi.fn();
+});
+
+afterEach(() => {
+	vi.restoreAllMocks();
+});
+
+describe('Lazy Loading Utils', () => {
+	describe('createLazyObserver', () => {
+		it('should create IntersectionObserver with default options', () => {
+			const callback = vi.fn();
+			const observer = createLazyObserver(callback);
+
+			expect(mockIntersectionObserver).toHaveBeenCalledWith(
+				expect.any(Function),
+				{
+					rootMargin: '50px',
+					threshold: 0.1
+				}
+			);
+			expect(observer).toBeDefined();
+		});
+
+		it('should create IntersectionObserver with custom options', () => {
+			const callback = vi.fn();
+			const options = {
+				rootMargin: '100px',
+				threshold: 0.5,
+				once: false
+			};
+
+			createLazyObserver(callback, options);
+
+			expect(mockIntersectionObserver).toHaveBeenCalledWith(
+				expect.any(Function),
+				{
+					rootMargin: '100px',
+					threshold: 0.5
+				}
+			);
+		});
+
+		it('should return null when IntersectionObserver is not supported', () => {
+			global.window = {} as any;
+
+			const callback = vi.fn();
+			const observer = createLazyObserver(callback);
+
+			expect(observer).toBeNull();
+		});
+
+		it('should call callback when element intersects', () => {
+			const callback = vi.fn();
+			createLazyObserver(callback);
+
+			// Simulate intersection
+			const mockEntry = {
+				isIntersecting: true,
+				target: mockElement
+			};
+
+			// Get the callback function passed to IntersectionObserver
+			const observerCallback = mockIntersectionObserver.mock.calls[0]?.[0];
+			if (!observerCallback) {
+				throw new Error('Observer callback not found');
+			}
+			observerCallback([mockEntry]);
+
+			expect(callback).toHaveBeenCalledWith(mockEntry);
+		});
+
+		it('should unobserve element after first intersection when once is true', () => {
+			const callback = vi.fn();
+			createLazyObserver(callback, { once: true });
+
+			const mockEntry = {
+				isIntersecting: true,
+				target: mockElement
+			};
+
+			const observerCallback = mockIntersectionObserver.mock.calls[0]?.[0];
+			if (!observerCallback) {
+				throw new Error('Observer callback not found');
+			}
+			observerCallback([mockEntry]);
+
+			expect(mockUnobserve).toHaveBeenCalledWith(mockElement);
+		});
+	});
+
+	describe('lazyLoadImage', () => {
+		it('should set up lazy loading for image', () => {
+			const cleanup = lazyLoadImage(mockImage as any);
+
+			expect(mockObserve).toHaveBeenCalledWith(mockImage);
+			expect(typeof cleanup).toBe('function');
+		});
+
+		it('should load image when intersecting', () => {
+			lazyLoadImage(mockImage as any);
+
+			// Simulate intersection
+			const mockEntry = {
+				isIntersecting: true,
+				target: mockImage
+			};
+
+			const observerCallback = mockIntersectionObserver.mock.calls[0]?.[0];
+			if (!observerCallback) {
+				throw new Error('Observer callback not found');
+			}
+			observerCallback([mockEntry]);
+
+			expect(mockImage.src).toBe('/test-image.jpg');
+			expect(mockImage.srcset).toBe('/test-image-320w.jpg 320w, /test-image-640w.jpg 640w');
+			expect(mockImage.removeAttribute).toHaveBeenCalledWith('data-src');
+			expect(mockImage.removeAttribute).toHaveBeenCalledWith('data-srcset');
+			expect(mockImage.classList.add).toHaveBeenCalledWith('lazy-loaded');
+			expect(mockImage.classList.remove).toHaveBeenCalledWith('lazy-loading');
+		});
+
+		it('should fallback to immediate loading when IntersectionObserver is not supported', () => {
+			global.window = {} as any;
+
+			const cleanup = lazyLoadImage(mockImage as any);
+
+			expect(mockImage.src).toBe('/test-image.jpg');
+			expect(mockImage.srcset).toBe('/test-image-320w.jpg 320w, /test-image-640w.jpg 640w');
+			expect(typeof cleanup).toBe('function');
+		});
+	});
+
+	describe('lazyLoadContent', () => {
+		it('should set up lazy loading for content element', () => {
+			const cleanup = lazyLoadContent(mockElement as any);
+
+			expect(mockObserve).toHaveBeenCalledWith(mockElement);
+			expect(typeof cleanup).toBe('function');
+		});
+
+		it('should dispatch lazy-load event when intersecting', () => {
+			lazyLoadContent(mockElement as any);
+
+			const mockEntry = {
+				isIntersecting: true,
+				target: mockElement
+			};
+
+			const observerCallback = mockIntersectionObserver.mock.calls[0]?.[0];
+			if (!observerCallback) {
+				throw new Error('Observer callback not found');
+			}
+			observerCallback([mockEntry]);
+
+			expect(mockElement.dispatchEvent).toHaveBeenCalled();
+			expect(mockElement.classList.add).toHaveBeenCalledWith('lazy-loaded');
+			expect(mockElement.classList.remove).toHaveBeenCalledWith('lazy-loading');
+		});
+	});
+
+	describe('isLazyLoadingSupported', () => {
+		it('should return true when IntersectionObserver is supported', () => {
+			expect(isLazyLoadingSupported()).toBe(true);
+		});
+
+		it('should return false when IntersectionObserver is not supported', () => {
+			global.window = {} as any;
+
+			expect(isLazyLoadingSupported()).toBe(false);
+		});
+
+		it('should return false in server environment', () => {
+			global.window = undefined as any;
+
+			expect(isLazyLoadingSupported()).toBe(false);
+		});
+	});
+
+	describe('getLoadingStrategy', () => {
+		it('should return lazy for slow connections', () => {
+			global.navigator = {
+				connection: {
+					effectiveType: '2g',
+					saveData: false
+				}
+			} as any;
+
+			expect(getLoadingStrategy()).toBe('lazy');
+		});
+
+		it('should return lazy when save data is enabled', () => {
+			global.navigator = {
+				connection: {
+					effectiveType: '4g',
+					saveData: true
+				}
+			} as any;
+
+			expect(getLoadingStrategy()).toBe('lazy');
+		});
+
+		it('should return eager for fast connections', () => {
+			global.navigator = {
+				connection: {
+					effectiveType: '4g',
+					saveData: false
+				}
+			} as any;
+
+			expect(getLoadingStrategy()).toBe('eager');
+		});
+
+		it('should return lazy as default when navigator is not available', () => {
+			global.navigator = undefined as any;
+
+			expect(getLoadingStrategy()).toBe('lazy');
+		});
+
+		it('should return lazy as default when connection info is not available', () => {
+			global.navigator = {} as any;
+
+			expect(getLoadingStrategy()).toBe('lazy');
+		});
+	});
+});

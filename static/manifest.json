@@ -1,0 +1,16 @@
+{
+	"name": "Agency Website",
+	"short_name": "Agency",
+	"description": "Professional agency offering web development, medical services, and educational courses",
+	"start_url": "/",
+	"display": "standalone",
+	"background_color": "#ffffff",
+	"theme_color": "#3b82f6",
+	"icons": [
+		{
+			"src": "/favicon.ico",
+			"sizes": "32x32",
+			"type": "image/x-icon"
+		}
+	]
+}

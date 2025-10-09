@@ -1,0 +1,8 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Additional Vitest Utilities > should have access to snapshot testing 1`] = `
+{
+  "name": "test",
+  "value": 42,
+}
+`;
