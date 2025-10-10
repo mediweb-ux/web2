@@ -546,3 +546,7 @@ body {
 		border: 2px solid hsl(var(--primary)) !important;
 	}
 }
+
+p {
+	margin-block-start: 1rem;
+}

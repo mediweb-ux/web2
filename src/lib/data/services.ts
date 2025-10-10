@@ -121,27 +121,7 @@ export const services: Service[] = [
 				icon: 'play'
 			}
 		],
-		portfolio: [
-			{
-				title: 'Online University Platform',
-				description: 'Comprehensive LMS for a major university with 10,000+ students and advanced analytics.',
-				image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=640&h=360&fit=crop&crop=center',
-				technologies: ['Django', 'React', 'PostgreSQL', 'Redis']
-			},
-			{
-				title: 'Corporate Training Portal',
-				description: 'Employee training platform with certification tracking and compliance reporting.',
-				image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=640&h=360&fit=crop&crop=center',
-				technologies: ['Laravel', 'Vue.js', 'MySQL', 'AWS S3']
-			},
-			{
-				title: 'Language Learning App',
-				description: 'Interactive language learning platform with speech recognition and gamification.',
-				image: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=640&h=360&fit=crop&crop=center',
-				link: 'https://example-language-app.com',
-				technologies: ['React Native', 'Node.js', 'MongoDB', 'WebRTC']
-			}
-		],
+		portfolio: [],
 		ctaText: 'Delta på kurs',
 		ctaLink: '/kontakt?service=kursvirksomhet'
 	}
