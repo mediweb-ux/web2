@@ -5,7 +5,7 @@
 	import About from '$lib/components/sections/About.svelte';
 	import ContactPreview from '$lib/components/sections/ContactPreview.svelte';
 	import SEO from '$lib/components/SEO.svelte';
-	import homeBg from '$lib/assets/hero-backgrounds/bg-home.svg?url';
+	import homeBg from '$lib/assets/hero-backgrounds/bg-home.png?url';
 </script>
 
 <SEO
@@ -16,18 +16,14 @@
 
 <HeroSection
 	title="MediWeb Solutions"
-	subtitle="Vi spesialiserer oss på moderne web-utvikling, innovative legetjenester og engasjerende kurs."
+	subtitle="Vi spesialiserer oss på tre ulike ting; moderne webutvikling, profesjonelle legetjenester og engasjerende kursvirksomhet."
 	backgroundImage={homeBg}
 	minHeight="min-h-screen"
 	overlayOpacity={0.4}
 >
 	<div class="flex flex-col sm:flex-row gap-4 justify-center items-center mt-8">
-		<Button href="/om-oss" variant="primary" size="lg">
-			Les mer om oss
-		</Button>
-		<Button href="/tjenester" variant="outline" size="lg">
-			Se våre tjenester
-		</Button>
+		<Button href="/om-oss" variant="primary" size="lg">Les mer om oss</Button>
+		<Button href="/tjenester" variant="outline" size="lg">Se våre tjenester</Button>
 	</div>
 </HeroSection>
 

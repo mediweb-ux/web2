@@ -50,6 +50,11 @@ export const actions: Actions = {
 		}
 
 		try {
+			// Debug: Log environment variables (remove in production)
+			console.log('RESEND_API_KEY:', RESEND_API_KEY ? 'Set' : 'Not set');
+			console.log('RESEND_FROM_EMAIL:', RESEND_FROM_EMAIL);
+			console.log('RESEND_TO_CONTACT_EMAIL:', RESEND_TO_CONTACT_EMAIL);
+
 			// Map service values to readable names
 			const serviceNames = services.map(service => {
 				switch (service) {
@@ -62,6 +67,7 @@ export const actions: Actions = {
 			});
 
 			// Send notification email to business
+			console.log('Attempting to send business email...');
 			const businessEmailResult = await resend.emails.send({
 				from: RESEND_FROM_EMAIL,
 				to: [RESEND_TO_CONTACT_EMAIL],
@@ -93,7 +99,10 @@ export const actions: Actions = {
 				`
 			});
 
+			console.log('Business email result:', businessEmailResult);
+
 			// Send confirmation email to customer
+			console.log('Attempting to send customer email...');
 			const customerEmailResult = await resend.emails.send({
 				from: RESEND_FROM_EMAIL,
 				to: [email],
@@ -142,8 +151,14 @@ export const actions: Actions = {
 				`
 			});
 
+			console.log('Customer email result:', customerEmailResult);
+
 			// Check if both emails were sent successfully
 			if (businessEmailResult.error || customerEmailResult.error) {
+				console.error('Email sending errors:', {
+					business: businessEmailResult.error,
+					customer: customerEmailResult.error
+				});
 				throw new Error('Feil ved sending av en eller flere e-poster');
 			}
 
@@ -152,9 +167,9 @@ export const actions: Actions = {
 				message: 'Takk for meldingen din! Vi har sendt deg en bekreftelse på e-post og vil svare deg så snart som mulig.'
 			};
 
-		} catch {
+		} catch (error) {
 			// Log error for debugging (in production, use proper logging)
-			// Error logged to server logs automatically
+			console.error('Email sending error:', error);
 			
 			return fail(500, {
 				error: 'Beklager, det oppsto en feil under innsending av meldingen din. Vennligst forsøk igjen eller kontakt oss direkte på post@mediweb.no.',

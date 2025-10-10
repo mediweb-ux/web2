@@ -18,19 +18,22 @@
 			name: 'John Doe',
 			role: 'Lead Developer',
 			description: 'Full-stack developer with 8+ years of experience in modern web technologies.',
-			image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face'
+			image:
+				'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face'
 		},
 		{
 			name: 'Jane Smith',
 			role: 'UX/UI Designer',
 			description: 'Creative designer focused on user-centered design and accessibility.',
-			image: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=300&h=300&fit=crop&crop=face'
+			image:
+				'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=300&h=300&fit=crop&crop=face'
 		},
 		{
 			name: 'Mike Johnson',
 			role: 'Medical Consultant',
 			description: 'Healthcare professional specializing in digital health solutions.',
-			image: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=300&h=300&fit=crop&crop=face'
+			image:
+				'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=300&h=300&fit=crop&crop=face'
 		}
 	];
 
@@ -72,20 +75,20 @@
 <!-- Hero Section -->
 <HeroSection
 	title="Om oss"
-	subtitle="We're a passionate team of developers, designers, and consultants dedicated to creating exceptional digital experiences that make a real difference in people's lives."
+	subtitle="Vi er et unikt firma på mange måter. Her kan du lese litt mer om oss og hvordan det hele startet!"
 	backgroundImage={aboutBg}
 	overlayOpacity={0.6}
 	minHeight="min-h-[500px]"
 />
 
 <!-- Mission Section -->
-<Section className="py-16 bg-muted/30">
+<Section className="py-16 bg-muted/30" ariaLabel="Vårt ønske">
 	<div class="max-w-4xl mx-auto text-center">
-		<h2 class="text-3xl font-bold mb-8">Our Mission</h2>
+		<h2 class="text-3xl font-bold mb-8">V&aring;rt &oslash;nske</h2>
 		<p class="text-lg text-muted-foreground leading-relaxed mb-8">
-			To bridge the gap between technology and human needs by creating innovative, accessible, 
-			and impactful digital solutions. We believe that great technology should empower people 
-			and organizations to achieve their goals more effectively.
+			Vi &oslash;nsker &aring; tilby profesjonelle tjenester innen v&aring;re tre
+			kompetanseomr&aring;der. Den unike kombinasjonen av kunnskap og erfaring som vi besitter, skal
+			komme deg som kunde til gode!
 		</p>
 		<div class="grid md:grid-cols-2 gap-8 mt-12">
 			<Card class="p-6">
@@ -94,8 +97,8 @@
 				</div>
 				<h3 class="text-xl font-semibold mb-3">Our Vision</h3>
 				<p class="text-muted-foreground">
-					To be the leading digital agency that transforms ideas into powerful, 
-					user-centered solutions that drive real business results.
+					To be the leading digital agency that transforms ideas into powerful, user-centered
+					solutions that drive real business results.
 				</p>
 			</Card>
 			<Card class="p-6">
@@ -104,8 +107,8 @@
 				</div>
 				<h3 class="text-xl font-semibold mb-3">Our Approach</h3>
 				<p class="text-muted-foreground">
-					We combine technical expertise with deep understanding of user needs 
-					to create solutions that are both powerful and intuitive.
+					We combine technical expertise with deep understanding of user needs to create solutions
+					that are both powerful and intuitive.
 				</p>
 			</Card>
 		</div>
@@ -121,8 +124,8 @@
 				<div class="text-center">
 					<div class="flex justify-center mb-4">
 						<div class="text-primary">
-						<Icon name={value.icon} size="xl" />
-					</div>
+							<Icon name={value.icon} size="xl" />
+						</div>
 					</div>
 					<h3 class="text-xl font-semibold mb-3">{value.title}</h3>
 					<p class="text-muted-foreground">{value.description}</p>

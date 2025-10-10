@@ -78,8 +78,8 @@ export const services: Service[] = [
 		id: 'legetjenester',
 		title: 'Legetjenester',
 		slug: 'legetjenester',
-		description: 'Profesjonelle (anestesi-)legetjenester til ulike behov, fra anestesi på din klinikk til medic på store arrangement.',
-		longDescription: 'We provide innovative digital solutions for healthcare providers, from patient management systems to telemedicine platforms. Our HIPAA-compliant solutions help medical practices streamline operations and improve patient care.',
+		description: 'Profesjonelle legetjenester til ulike behov, fra anestesi på din klinikk til medic på store arrangement.',
+		longDescription: 'Vi tilbyr ulike legetjenester til deg som kunde, fra ren anestesilegedekning (vi tilbyr også fullt anestesioppsett) på din klinikk, til medic-funksjoner på arrangement.',
 		icon: 'heart',
 		features: [
 			{
@@ -88,8 +88,8 @@ export const services: Service[] = [
 				icon: 'users'
 			},
 			{
-				title: 'Medic',
-				description: 'Har du behov for medic til et arrangement, idretsstevne eller konsert? Ta kontakt!',
+				title: 'Medic-funksjon',
+				description: 'Har du behov for "medic" til et arrangement, idrettsstevne eller konsert? Ta kontakt!',
 				icon: 'shield'
 			},
 			{
@@ -99,7 +99,7 @@ export const services: Service[] = [
 			}
 		],
 		portfolio: [],
-		ctaText: 'Diskuter dine behov',
+		ctaText: 'Kontakt oss',
 		ctaLink: '/kontakt?service=legetjenester'
 	},
 	{
@@ -116,24 +116,9 @@ export const services: Service[] = [
 				icon: 'graduation-cap'
 			},
 			{
-				title: 'Interactive Content',
-				description: 'Engaging multimedia content with quizzes, assignments, and interactive elements.',
+				title: 'HLR-kurs på ulike nivå',
+				description: 'Ulike HLR-kurs, inkludert BHLR, DHLR og AHLR.',
 				icon: 'play'
-			},
-			{
-				title: 'Progress Tracking',
-				description: 'Comprehensive analytics and reporting for student progress and course effectiveness.',
-				icon: 'trending-up'
-			},
-			{
-				title: 'Multi-format Support',
-				description: 'Support for video, audio, documents, and interactive content in various formats.',
-				icon: 'file'
-			},
-			{
-				title: 'Certification System',
-				description: 'Automated certificate generation and credential management for course completion.',
-				icon: 'award'
 			}
 		],
 		portfolio: [
