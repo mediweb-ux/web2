@@ -3,6 +3,7 @@
 	import { onMount } from 'svelte';
 	import { enhance } from '$app/forms';
 	import { page } from '$app/state';
+	import { Analytics } from '$lib/utils/analytics';
 
 	export let selectedService: string = '';
 
@@ -68,7 +69,12 @@
 	onMount(() => {
 		if (selectedService) {
 			formData.services = [selectedService];
+			// Track service interest from URL parameter
+			Analytics.trackServiceInterest(selectedService);
 		}
+		
+		// Track contact form start when component loads
+		Analytics.trackContactFormStart();
 	});
 
 	$: if (selectedService && !formData.services.includes(selectedService)) {
@@ -118,6 +124,8 @@
 	function handleServiceChange(serviceValue: string, checked: boolean) {
 		if (checked) {
 			formData.services = [...formData.services, serviceValue];
+			// Track service interest
+			Analytics.trackServiceInterest(serviceValue);
 		} else {
 			formData.services = formData.services.filter((s) => s !== serviceValue);
 		}
@@ -180,6 +188,11 @@
 					result.data?.['message'] ||
 						'Takk for meldingen din! Vi vil nå se på den og svare deg så fort vi kan!'
 				);
+				
+				// Track successful form completion
+				Analytics.trackContactFormComplete(formData.services);
+				Analytics.trackFormSubmission('contact_form', true);
+				
 				// Reset form
 				enhanceFormElement.reset();
 				formData = {
@@ -201,6 +214,9 @@
 				submitStatus = 'error';
 				submitMessage =
 					'Beklager, det oppsto en feil under innsending av meldingen din. Vennligst forsøk igjen.';
+				
+				// Track failed form submission
+				Analytics.trackFormSubmission('contact_form', false);
 			}
 
 			await update();

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/state';
+	import { Analytics } from '$lib/utils/analytics';
 
 	export let mobile = false;
 
@@ -60,6 +61,7 @@
 			<li>
 				<a
 					href={item.href}
+					on:click={() => Analytics.trackNavigation(item.label.toLowerCase(), mobile ? 'mobile_nav' : 'desktop_nav')}
 					class={`
 						${
 							mobile

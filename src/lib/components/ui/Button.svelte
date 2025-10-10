@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { Analytics } from '$lib/utils/analytics';
+
 	// Props
 	export let variant: 'primary' | 'secondary' | 'outline' = 'primary';
 	export let size: 'sm' | 'md' | 'lg' = 'md';
@@ -9,6 +11,7 @@
 	export let ariaLabel: string | undefined = undefined;
 	export let ariaDescribedBy: string | undefined = undefined;
 	export let onclick: (() => void) | undefined = undefined;
+	export let trackingName: string | undefined = undefined;
 	
 	// Allow custom classes to be passed in
 	let className: string = '';
@@ -39,7 +42,12 @@
 		role="button"
 		aria-label={ariaLabel}
 		aria-describedby={ariaDescribedBy}
-		on:click={onclick}
+		on:click={() => {
+			if (trackingName) {
+				Analytics.trackButtonClick(trackingName, href);
+			}
+			if (onclick) onclick();
+		}}
 	>
 		{#if loading}
 			<svg class="animate-spin -ml-1 mr-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true">
@@ -57,7 +65,12 @@
 		aria-label={ariaLabel}
 		aria-describedby={ariaDescribedBy}
 		aria-disabled={disabled}
-		on:click={onclick}
+		on:click={() => {
+			if (trackingName) {
+				Analytics.trackButtonClick(trackingName, 'button');
+			}
+			if (onclick) onclick();
+		}}
 	>
 		{#if loading}
 			<svg class="animate-spin -ml-1 mr-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true">

@@ -63,7 +63,7 @@
 />
 
 <!-- Breadcrumb Navigation -->
-<Section className="py-4 border-b border-border">
+<Section className="py-2 border-b border-border">
 	<Breadcrumb items={breadcrumbItems} />
 </Section>
 

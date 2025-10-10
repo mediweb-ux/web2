@@ -2,6 +2,7 @@
 	import { page } from '$app/state';
 	import { onMount } from 'svelte';
 	import { theme } from '$lib/stores';
+	import { Analytics } from '$lib/utils/analytics';
 	import ThemeToggle from '../ui/ThemeToggle.svelte';
 	import Navigation from './Navigation.svelte';
 
@@ -94,6 +95,7 @@
 			<div class="flex items-center">
 				<a
 					href="/"
+					on:click={() => Analytics.trackNavigation('home', 'header_logo')}
 					class="flex items-center space-x-3 text-xl font-bold text-foreground hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-sm transition-colors duration-200"
 					aria-label="MediWeb Solutions - Gå til forsiden"
 				>
