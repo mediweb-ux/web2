@@ -12,11 +12,11 @@
 
 <Section class="py-20 md:py-32">
 	<div class="text-center max-w-4xl mx-auto">
-		<h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 leading-tight">
+		<h1 class="text-responsive-5xl font-bold text-foreground mb-6 leading-tight">
 			{title}
 		</h1>
 		
-		<p class="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
+		<p class="text-responsive-xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
 			{subtitle}
 		</p>
 		

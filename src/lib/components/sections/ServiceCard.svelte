@@ -12,7 +12,7 @@
 		<div class="flex-shrink-0">
 			<Icon name={service.icon} size="lg" class="text-primary" />
 		</div>
-		<h3 class="text-xl font-semibold text-foreground">{service.title}</h3>
+		<h3 class="text-heading-lg font-semibold text-foreground">{service.title}</h3>
 	</div>
 	
 	<p class="text-muted-foreground mb-6 flex-grow">
@@ -20,10 +20,10 @@
 	</p>
 	
 	<div class="mb-6">
-		<h4 class="text-sm font-medium text-foreground mb-3">N&oslash;kkelinformasjon</h4>
+		<h4 class="text-heading-sm font-medium text-foreground mb-3">N&oslash;kkelinformasjon</h4>
 		<ul class="space-y-2">
 			{#each service.features.slice(0, 3) as feature}
-				<li class="flex items-start gap-2 text-sm text-muted-foreground">
+				<li class="flex items-start gap-2 text-body-sm text-muted-foreground">
 					<Icon name="check" size="sm" class="text-primary mt-0.5 flex-shrink-0" />
 					<span>{feature.title}</span>
 				</li>

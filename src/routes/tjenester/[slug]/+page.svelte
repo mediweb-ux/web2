@@ -10,20 +10,20 @@
 	const { service, relatedServices } = data;
 </script>
 
-<SEO 
-	title="{service.title} - Profesjonelle {service.title} tjenester"
+<SEO
+	title="MediWeb - {service.title}"
 	description={service.longDescription}
 	keywords={[service.title.toLowerCase(), 'profesjonelle tjenester', 'digitale løsninger']}
 />
 
 <!-- Breadcrumb Navigation -->
 <Section padding="none" className="py-6 border-b border-border" ariaLabel="Navigasjon">
-	<Breadcrumb 
+	<Breadcrumb
 		items={[
 			{ label: 'Hjem', href: '/' },
 			{ label: 'Tjenester', href: '/tjenester' },
 			{ label: service.title, href: `/tjenester/${service.slug}`, current: true }
-		]} 
+		]}
 	/>
 </Section>
 

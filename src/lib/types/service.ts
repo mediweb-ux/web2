@@ -12,6 +12,15 @@ export interface PortfolioItem {
 	technologies: string[];
 }
 
+export interface ProcessStep {
+	stepNumber: number;
+	title: string;
+	subtitle: string;
+	content: string[];
+	image?: string;
+	backgroundColor?: string;
+}
+
 export interface Service {
 	id: string;
 	title: string;
@@ -23,4 +32,10 @@ export interface Service {
 	portfolio: PortfolioItem[];
 	ctaText: string;
 	ctaLink: string;
+	// Optional detailed content for CMS-ready structure
+	detailedContent?: {
+		introduction?: string[];
+		processSteps?: ProcessStep[];
+		conclusion?: string[];
+	};
 }

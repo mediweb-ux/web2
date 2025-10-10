@@ -49,7 +49,7 @@
 							<Icon name={service.icon} size="xl" />
 						</div>
 
-						<h2 class="text-2xl font-bold text-foreground mb-4">
+						<h2 class="text-responsive-2xl font-bold text-foreground mb-4">
 							{service.title}
 						</h2>
 
@@ -59,12 +59,12 @@
 
 						<!-- Key Features -->
 						<div class="mb-8">
-							<h3 class="text-sm font-semibold text-foreground mb-3 uppercase tracking-wide">
+							<h3 class="text-heading-sm font-semibold text-foreground mb-3 uppercase tracking-wide">
 								N&oslash;kkelinformasjon
 							</h3>
 							<ul class="space-y-2">
 								{#each service.features.slice(0, 4) as feature}
-									<li class="flex items-center text-sm text-muted-foreground">
+									<li class="flex items-center text-body-sm text-muted-foreground">
 										<span class="text-primary mr-2 flex-shrink-0">
 											<Icon name="check" size="sm" />
 										</span>
@@ -90,8 +90,8 @@
 <!-- CTA Section -->
 <Section className="py-16">
 	<div class="text-center max-w-4xl mx-auto">
-		<h2 class="text-3xl font-bold text-foreground mb-6">Klar til &aring; starte?</h2>
-		<p class="text-xl text-muted-foreground mb-8">
+		<h2 class="text-responsive-3xl font-bold text-foreground mb-6">Klar til &aring; starte?</h2>
+		<p class="text-responsive-lg text-muted-foreground mb-8">
 			La oss ta en prat og se hvordan vi kan hjelpe deg med en av v&aring;re tjenester. Kontakt oss
 			i dag, s&aring; snakkes vi!
 		</p>

@@ -54,13 +54,13 @@
 		<div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
 			<!-- Contact Form -->
 			<div>
-				<h2 class="text-2xl font-bold text-foreground mb-6">Send en melding</h2>
+				<h2 class="text-responsive-2xl font-bold text-foreground mb-6">Send en melding</h2>
 				<ContactForm {selectedService} />
 			</div>
 
 			<!-- Contact Information -->
 			<div>
-				<h2 class="text-2xl font-bold text-foreground mb-6">Kontaktinformasjon</h2>
+				<h2 class="text-responsive-2xl font-bold text-foreground mb-6">Kontaktinformasjon</h2>
 
 				<div class="space-y-6">
 					<!-- Email -->
@@ -82,7 +82,7 @@
 							</svg>
 						</div>
 						<div>
-							<h3 class="text-lg font-medium text-foreground">E-post</h3>
+							<h3 class="text-heading font-medium text-foreground">E-post</h3>
 							<a
 								href="mailto:{contactInfo.email}"
 								class="text-primary hover:underline focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 rounded"
@@ -118,7 +118,7 @@
 							</svg>
 						</div>
 						<div>
-							<h3 class="text-lg font-medium text-foreground">Postadresse</h3>
+							<h3 class="text-heading font-medium text-foreground">Postadresse</h3>
 							<address class="text-muted-foreground not-italic">
 								{contactInfo.address.street}<br />
 								{contactInfo.address.zip}
@@ -130,7 +130,7 @@
 
 				<!-- Additional Information -->
 				<div class="mt-8 p-6 bg-card border border-border rounded-lg">
-					<h3 class="text-lg font-medium text-foreground mb-3">Hva du kan forvente</h3>
+					<h3 class="text-heading font-medium text-foreground mb-3">Hva du kan forvente</h3>
 					<ul class="space-y-2 text-muted-foreground">
 						<li class="flex items-start space-x-2">
 							<svg

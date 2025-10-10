@@ -10,7 +10,7 @@
 	export let items: BreadcrumbItem[] = [];
 </script>
 
-<nav aria-label="Breadcrumb" class="flex items-center space-x-2 text-sm">
+<nav aria-label="Breadcrumb" class="flex items-center space-x-2 text-body-sm">
 	<ol class="flex items-center space-x-2">
 		{#each items as item, index}
 			<li class="flex items-center">

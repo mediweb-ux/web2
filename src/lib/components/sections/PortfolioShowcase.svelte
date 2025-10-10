@@ -22,7 +22,7 @@
 			</div>
 			
 			<div class="p-6">
-				<h3 class="text-xl font-semibold text-foreground mb-3">
+				<h3 class="text-heading-lg font-semibold text-foreground mb-3">
 					{item.title}
 				</h3>
 				
@@ -32,10 +32,10 @@
 				
 				{#if item.technologies.length > 0}
 					<div class="mb-4">
-						<h4 class="text-sm font-medium text-foreground mb-2">Jobbet med:</h4>
+						<h4 class="text-heading-sm font-medium text-foreground mb-2">Jobbet med:</h4>
 						<div class="flex flex-wrap gap-2">
 							{#each item.technologies as tech}
-								<span class="px-2 py-1 text-xs bg-muted text-muted-foreground rounded-md">
+								<span class="px-2 py-1 text-body-sm bg-muted text-muted-foreground rounded-md">
 									{tech}
 								</span>
 							{/each}

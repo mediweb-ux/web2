@@ -100,13 +100,14 @@
 					aria-label="MediWeb Solutions - Gå til forsiden"
 				>
 					<!-- Dynamic logo that changes with theme -->
-					<img
-						src={currentLogo}
-						alt="MediWeb Solutions logo"
-						class="h-8 w-auto transition-opacity duration-300"
-						loading="eager"
-						key={$theme}
-					/>
+					{#key $theme}
+						<img
+							src={currentLogo}
+							alt="MediWeb Solutions logo"
+							class="h-8 w-auto transition-opacity duration-300"
+							loading="eager"
+						/>
+					{/key}
 					<!-- Company name (hidden on small screens if you want logo-only) -->
 					<span class="hidden sm:block">MediWeb Solutions</span>
 				</a>

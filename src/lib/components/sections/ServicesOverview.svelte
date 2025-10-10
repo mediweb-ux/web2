@@ -7,10 +7,10 @@
 
 <Section id="services" class="py-12 md:py-16">
 	<div class="text-center mb-16">
-		<h2 class="text-3xl md:text-4xl font-bold text-foreground mb-4">
+		<h2 class="text-responsive-4xl font-bold text-foreground mb-4">
 			V&aring;re tjenester
 		</h2>
-		<p class="text-xl text-muted-foreground max-w-3xl mx-auto">
+		<p class="text-responsive-lg text-muted-foreground max-w-3xl mx-auto">
 			Vi tilbyr fremtidsrettede l&oslash;sninger innen tre n&oslash;kkelomr&aring;der, der vi kombinerer
 			teknisk ekspertise med industrispesifikk kunnskap for &aring; kunne levere fantastiske resultater.
 		</p>
@@ -23,7 +23,7 @@
 	</div>
 
 	<div class="text-center">
-		<p class="text-lg text-muted-foreground mb-6">
+		<p class="text-body-lg text-muted-foreground mb-6">
 			Trenger du en løsning som kombinerer ulike tjenester?
 		</p>
 		<Button href="/kontakt" variant="outline" size="lg">

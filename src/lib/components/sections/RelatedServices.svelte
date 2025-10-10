@@ -18,10 +18,10 @@
 	<Section class="py-16 bg-muted/30">
 		<div class="max-w-6xl mx-auto">
 			<div class="text-center mb-12">
-				<h2 class="text-3xl font-bold text-foreground mb-4">
+				<h2 class="text-responsive-3xl font-bold text-foreground mb-4">
 					Utforsk v&aring;re andre tjenester
 				</h2>
-				<p class="text-lg text-muted-foreground">
+				<p class="text-body-lg text-muted-foreground">
 					Se hvordan vi kan bist&aring; deg ogs&aring; innen v&aring;re andre tjenesteomr&aring;der
 				</p>
 			</div>
@@ -34,7 +34,7 @@
 								<Icon name={service.icon} size="lg" class="text-primary" />
 							</div>
 							<div class="flex-1">
-								<h3 class="text-xl font-semibold text-foreground mb-2">
+								<h3 class="text-heading-lg font-semibold text-foreground mb-2">
 									{service.title}
 								</h3>
 								<p class="text-muted-foreground mb-4">
@@ -44,7 +44,7 @@
 								<!-- Feature highlights -->
 								<ul class="space-y-1 mb-6">
 									{#each service.features.slice(0, 3) as feature}
-										<li class="flex items-center text-sm text-muted-foreground">
+										<li class="flex items-center text-body-sm text-muted-foreground">
 											<Icon name="check" size="sm" class="text-primary mr-2 flex-shrink-0" />
 											{feature.title}
 										</li>

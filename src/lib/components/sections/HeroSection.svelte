@@ -43,11 +43,11 @@
 	<!-- Content -->
 	<div class="relative z-10 px-4 md:px-6 lg:px-8 w-full max-w-7xl mx-auto">
 		<div class={textClasses}>
-			<h1 class="text-4xl lg:text-5xl font-bold text-white mb-6 drop-shadow-lg">
+			<h1 class="text-responsive-4xl font-bold text-white mb-6 drop-shadow-lg">
 				{title}
 			</h1>
 			{#if subtitle}
-				<p class="text-xl text-white/90 leading-relaxed drop-shadow-md">
+				<p class="text-responsive-lg text-white/90 leading-relaxed drop-shadow-md">
 					{subtitle}
 				</p>
 			{/if}

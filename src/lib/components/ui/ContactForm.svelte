@@ -245,7 +245,7 @@
 						clip-rule="evenodd"
 					/>
 				</svg>
-				<p class="ml-3 text-sm text-green-700 dark:text-green-300">{submitMessage}</p>
+				<p class="ml-3 text-body-sm text-green-700 dark:text-green-300">{submitMessage}</p>
 			</div>
 		</div>
 	{/if}
@@ -269,13 +269,13 @@
 						clip-rule="evenodd"
 					/>
 				</svg>
-				<p class="ml-3 text-sm text-red-700 dark:text-red-300">{submitMessage}</p>
+				<p class="ml-3 text-body-sm text-red-700 dark:text-red-300">{submitMessage}</p>
 			</div>
 		</div>
 	{/if}
 
 	<div>
-		<label for="name" class="block text-sm font-medium text-foreground mb-1">
+		<label for="name" class="block text-body font-medium text-foreground mb-1">
 			Navn <span class="text-destructive" aria-label="required">*</span>
 		</label>
 		<input
@@ -294,14 +294,14 @@
 			required
 		/>
 		{#if errors.name}
-			<p id="name-error" class="mt-1 text-sm text-destructive" role="alert">
+			<p id="name-error" class="mt-1 text-body-sm text-destructive" role="alert">
 				{errors.name}
 			</p>
 		{/if}
 	</div>
 
 	<div>
-		<label for="email" class="block text-sm font-medium text-foreground mb-1">
+		<label for="email" class="block text-body font-medium text-foreground mb-1">
 			E-postadresse <span class="text-destructive" aria-label="required">*</span>
 		</label>
 		<input
@@ -320,7 +320,7 @@
 			required
 		/>
 		{#if errors.email}
-			<p id="email-error" class="mt-1 text-sm text-destructive" role="alert">
+			<p id="email-error" class="mt-1 text-body-sm text-destructive" role="alert">
 				{errors.email}
 			</p>
 		{/if}
@@ -328,7 +328,7 @@
 
 	<div>
 		<fieldset class="space-y-3">
-			<legend class="block text-sm font-medium text-foreground mb-3">
+			<legend class="block text-body font-medium text-foreground mb-3">
 				Velg tjeneste(r) <span class="text-destructive" aria-label="required">*</span>
 			</legend>
 
@@ -352,7 +352,7 @@
 							class:focus:ring-destructive={errors.services}
 							aria-invalid={errors.services ? 'true' : 'false'}
 						/>
-						<span class="text-sm font-medium text-foreground select-none">
+						<span class="text-body font-medium text-foreground select-none">
 							{service.label}
 						</span>
 					</label>
@@ -361,14 +361,14 @@
 		</fieldset>
 
 		{#if errors.services}
-			<p id="services-error" class="mt-1 text-sm text-destructive" role="alert">
+			<p id="services-error" class="mt-1 text-body-sm text-destructive" role="alert">
 				{errors.services}
 			</p>
 		{/if}
 	</div>
 
 	<div>
-		<label for="message" class="block text-sm font-medium text-foreground mb-1">
+		<label for="message" class="block text-body font-medium text-foreground mb-1">
 			Melding <span class="text-destructive" aria-label="required">*</span>
 		</label>
 		<textarea
@@ -388,7 +388,7 @@
 			required
 		></textarea>
 		{#if errors.message}
-			<p id="message-error" class="mt-1 text-sm text-destructive" role="alert">
+			<p id="message-error" class="mt-1 text-body-sm text-destructive" role="alert">
 				{errors.message}
 			</p>
 		{/if}
