@@ -1,0 +1,30 @@
+<svg width="1920" height="600" viewBox="0 0 1920 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="aboutGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#7c3aed;stop-opacity:0.8" />
+      <stop offset="50%" style="stop-color:#5b21b6;stop-opacity:0.6" />
+      <stop offset="100%" style="stop-color:#4c1d95;stop-opacity:0.4" />
+    </linearGradient>
+    <pattern id="waves" x="0" y="0" width="100" height="50" patternUnits="userSpaceOnUse">
+      <path d="M0 25 Q25 10 50 25 T100 25" stroke="white" stroke-width="1" fill="none" opacity="0.1"/>
+    </pattern>
+  </defs>
+  
+  <rect width="1920" height="600" fill="url(#aboutGradient)"/>
+  <rect width="1920" height="600" fill="url(#waves)"/>
+  
+  <!-- Abstract shapes representing people/team -->
+  <g opacity="0.06" fill="white">
+    <circle cx="300" cy="200" r="30"/>
+    <rect x="285" y="240" width="30" height="50" rx="15"/>
+    
+    <circle cx="1500" cy="300" r="35"/>
+    <rect x="1482" y="345" width="36" height="60" rx="18"/>
+    
+    <circle cx="900" cy="150" r="25"/>
+    <rect x="887" y="185" width="26" height="45" rx="13"/>
+  </g>
+  
+  <!-- Connecting lines for collaboration theme -->
+  <path d="M300 250 Q600 200 900 200 Q1200 200 1500 350" stroke="white" stroke-width="2" fill="none" opacity="0.1"/>
+</svg>

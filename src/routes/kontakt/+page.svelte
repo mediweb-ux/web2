@@ -3,7 +3,9 @@
 	import { onMount } from 'svelte';
 	import ContactForm from '$lib/components/ui/ContactForm.svelte';
 	import Section from '$lib/components/layout/Section.svelte';
+	import HeroSection from '$lib/components/sections/HeroSection.svelte';
 	import SEO from '$lib/components/SEO.svelte';
+	import kontaktBg from '$lib/assets/hero-backgrounds/bg-kontakt.png';
 
 	// Get service parameter from URL if present
 	let selectedService = '';
@@ -37,18 +39,14 @@
 	keywords={['kontakt', 'konsultasjon', 'prosjektforespørsel', 'digitalt byrå']}
 />
 
-<!-- Hero Section -->
-<Section className="py-16 lg:py-24" ariaLabel="Innledning">
-	<div class="text-center max-w-4xl mx-auto">
-		<h1 class="text-4xl lg:text-5xl font-bold text-foreground mb-6">
-			Kontakt oss
-		</h1>
-		<p class="text-xl text-muted-foreground mb-8 leading-relaxed">
-			Klar til &aring; starte ditt prosjekt? Vi vil gjerne h&oslash;re fra deg, ta kontakt s&aring;
-			kan vi snakkes!
-		</p>
-	</div>
-</Section>
+<!-- Hero Section with Background -->
+<HeroSection
+	title="Kontakt oss"
+	subtitle="Klar til å starte ditt prosjekt? Vi vil gjerne høre fra deg, ta kontakt så kan vi snakkes!"
+	backgroundImage={kontaktBg}
+	overlayOpacity={0.4}
+	minHeight="min-h-[500px]"
+/>
 
 <!-- Contact Content -->
 <Section className="py-16 bg-muted/30" ariaLabel="Kontakt innhold">
@@ -120,7 +118,7 @@
 							</svg>
 						</div>
 						<div>
-							<h3 class="text-lg font-medium text-foreground">Adresse</h3>
+							<h3 class="text-lg font-medium text-foreground">Postadresse</h3>
 							<address class="text-muted-foreground not-italic">
 								{contactInfo.address.street}<br />
 								{contactInfo.address.zip}
@@ -132,9 +130,7 @@
 
 				<!-- Additional Information -->
 				<div class="mt-8 p-6 bg-card border border-border rounded-lg">
-					<h3 class="text-lg font-medium text-foreground mb-3">
-						Hva du kan forvente
-					</h3>
+					<h3 class="text-lg font-medium text-foreground mb-3">Hva du kan forvente</h3>
 					<ul class="space-y-2 text-muted-foreground">
 						<li class="flex items-start space-x-2">
 							<svg

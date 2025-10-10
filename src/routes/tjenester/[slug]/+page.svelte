@@ -17,7 +17,7 @@
 />
 
 <!-- Breadcrumb Navigation -->
-<Section className="py-2 border-b border-border" ariaLabel="Navigasjon">
+<Section padding="none" className="py-6 border-b border-border" ariaLabel="Navigasjon">
 	<Breadcrumb 
 		items={[
 			{ label: 'Hjem', href: '/' },

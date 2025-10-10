@@ -4,8 +4,10 @@
 	import Icon from '$lib/components/ui/Icon.svelte';
 	import Card from '$lib/components/ui/Card.svelte';
 	import Section from '$lib/components/layout/Section.svelte';
+	import HeroSection from '$lib/components/sections/HeroSection.svelte';
 	import Breadcrumb from '$lib/components/ui/Breadcrumb.svelte';
 	import SEO from '$lib/components/SEO.svelte';
+	import servicesBg from '$lib/assets/hero-backgrounds/services.svg';
 
 	export let data: PageData;
 	const { services } = data;
@@ -18,7 +20,7 @@
 />
 
 	<!-- Breadcrumb Navigation -->
-	<Section className="py-2 border-b border-border" ariaLabel="Navigasjon">
+	<Section padding="none" className="py-6 border-b border-border" ariaLabel="Navigasjon">
 		<Breadcrumb
 			items={[
 				{ label: 'Hjem', href: '/' },
@@ -28,16 +30,13 @@
 	</Section>
 
 	<!-- Hero Section -->
-	<Section className="py-16 lg:py-24">
-		<div class="text-center max-w-4xl mx-auto">
-			<h1 class="text-4xl lg:text-5xl font-bold text-foreground mb-6">
-				V&aring;re tjenester
-			</h1>
-			<p class="text-xl text-muted-foreground mb-8 leading-relaxed">
-				Vi tilbyr innovative og profesjonelle l&oslash;sninger innen tre ulike omr&aring;der &mdash; webutvikling, legetjenester og kursvirksomhet.
-			</p>
-		</div>
-	</Section>
+	<HeroSection
+		title="Våre tjenester"
+		subtitle="Vi tilbyr innovative og profesjonelle løsninger innen tre ulike områder — webutvikling, legetjenester og kursvirksomhet."
+		backgroundImage={servicesBg}
+		overlayOpacity={0.5}
+		minHeight="min-h-[450px]"
+	/>
 
 	<!-- Tjenester Grid -->
 	<Section className="py-16 bg-muted/30" ariaLabel="Tjenester">

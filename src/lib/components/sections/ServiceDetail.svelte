@@ -4,27 +4,44 @@
 	import Icon from '$lib/components/ui/Icon.svelte';
 	import PortfolioShowcase from './PortfolioShowcase.svelte';
 	import Section from '$lib/components/layout/Section.svelte';
+	import HeroSection from './HeroSection.svelte';
+	
+	// Import service-specific backgrounds
+	import webutviklingBg from '$lib/assets/hero-backgrounds/bg-webutvikling.png';
+	import legetjenesterBg from '$lib/assets/hero-backgrounds/bg-legetjenester.png';
+	import kursvirksomhetBg from '$lib/assets/hero-backgrounds/bg-kursvirksomhet.png';
+	import servicesBg from '$lib/assets/hero-backgrounds/services.svg';
 
 	export let service: Service;
+
+	// Map service slugs to background images
+	const backgroundImages: Record<string, string> = {
+		'webutvikling': webutviklingBg,
+		'legetjenester': legetjenesterBg,
+		'kursvirksomhet': kursvirksomhetBg
+	};
+
+	// Get background image for current service, fallback to generic services background
+	$: backgroundImage = backgroundImages[service.slug] || servicesBg;
 </script>
 
 <!-- Hero Section -->
-<Section class="py-16 lg:py-24">
-	<div class="text-center max-w-4xl mx-auto">
-		<div class="flex justify-center mb-6">
-			<Icon name={service.icon} size="xl" class="text-primary" />
+<HeroSection
+	title={service.title}
+	subtitle={service.longDescription}
+	backgroundImage={backgroundImage}
+	overlayOpacity={0.5}
+	minHeight="min-h-[500px]"
+>
+	<div class="mt-8 flex flex-col items-center gap-6">
+		<div class="flex justify-center">
+			<Icon name={service.icon} size="xl" class="text-white drop-shadow-lg" />
 		</div>
-		<h1 class="text-4xl lg:text-5xl font-bold text-foreground mb-6">
-			{service.title}
-		</h1>
-		<p class="text-xl text-muted-foreground mb-8 leading-relaxed">
-			{service.longDescription}
-		</p>
-		<Button href="/kontakt" variant="primary" size="lg">
+		<Button href="/kontakt" variant="secondary" size="lg" trackingName="service_hero_cta">
 			Kom i gang
 		</Button>
 	</div>
-</Section>
+</HeroSection>
 
 <!-- Features Section -->
 <Section class="py-16 bg-muted/50">

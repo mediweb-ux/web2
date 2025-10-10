@@ -1,10 +1,12 @@
 <script lang="ts">
 	import SEO from '$lib/components/SEO.svelte';
 	import Section from '$lib/components/layout/Section.svelte';
+	import HeroSection from '$lib/components/sections/HeroSection.svelte';
 	import Breadcrumb from '$lib/components/ui/Breadcrumb.svelte';
 	import Card from '$lib/components/ui/Card.svelte';
 	import Button from '$lib/components/ui/Button.svelte';
 	import Icon from '$lib/components/ui/Icon.svelte';
+	import aboutBg from '$lib/assets/hero-backgrounds/bg-omoss.png';
 
 	const breadcrumbItems = [
 		{ label: 'Hjem', href: '/' },
@@ -63,22 +65,18 @@
 />
 
 <!-- Breadcrumb Navigation -->
-<Section className="py-2 border-b border-border">
+<Section padding="none" className="py-6 border-b border-border">
 	<Breadcrumb items={breadcrumbItems} />
 </Section>
 
 <!-- Hero Section -->
-<Section className="py-16 lg:py-24">
-	<div class="text-center max-w-4xl mx-auto">
-		<h1 class="text-4xl lg:text-6xl font-bold tracking-tight mb-6">
-			Om oss
-		</h1>
-		<p class="text-xl text-muted-foreground mb-8 leading-relaxed">
-			We're a passionate team of developers, designers, and consultants dedicated to creating 
-			exceptional digital experiences that make a real difference in people's lives.
-		</p>
-	</div>
-</Section>
+<HeroSection
+	title="Om oss"
+	subtitle="We're a passionate team of developers, designers, and consultants dedicated to creating exceptional digital experiences that make a real difference in people's lives."
+	backgroundImage={aboutBg}
+	overlayOpacity={0.6}
+	minHeight="min-h-[500px]"
+/>
 
 <!-- Mission Section -->
 <Section className="py-16 bg-muted/30">
