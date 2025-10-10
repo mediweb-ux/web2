@@ -4,6 +4,7 @@
 	import Button from '$lib/components/ui/Button.svelte';
 	import ResponsiveImage from '$lib/components/ui/ResponsiveImage.svelte';
 
+
 	export let items: PortfolioItem[];
 </script>
 
@@ -16,6 +17,7 @@
 					alt={item.title}
 					className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
 					sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+					formats={[]}
 				/>
 			</div>
 			
@@ -30,7 +32,7 @@
 				
 				{#if item.technologies.length > 0}
 					<div class="mb-4">
-						<h4 class="text-sm font-medium text-foreground mb-2">Technologies:</h4>
+						<h4 class="text-sm font-medium text-foreground mb-2">Jobbet med:</h4>
 						<div class="flex flex-wrap gap-2">
 							{#each item.technologies as tech}
 								<span class="px-2 py-1 text-xs bg-muted text-muted-foreground rounded-md">
@@ -43,7 +45,7 @@
 				
 				{#if item.link}
 					<Button href={item.link} variant="outline" size="sm" class="w-full">
-						View Project
+						Besøk {item.title}
 					</Button>
 				{/if}
 			</div>

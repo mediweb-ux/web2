@@ -6,7 +6,7 @@ export const load: PageServerLoad = async ({ params }) => {
 	const service = getServiceBySlug(params.slug);
 	
 	if (!service) {
-		throw error(404, 'Service not found');
+		throw error(404, 'Fant ikke tjenesten');
 	}
 
 	// Get related services (exclude current service)

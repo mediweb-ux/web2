@@ -5,7 +5,7 @@
 	import Section from '$lib/components/layout/Section.svelte';
 	import HeroSection from '$lib/components/sections/HeroSection.svelte';
 	import SEO from '$lib/components/SEO.svelte';
-	import kontaktBg from '$lib/assets/hero-backgrounds/bg-kontakt.png';
+	import kontaktBg from '$lib/assets/hero-backgrounds/bg-kontakt.png?url';
 
 	// Get service parameter from URL if present
 	let selectedService = '';

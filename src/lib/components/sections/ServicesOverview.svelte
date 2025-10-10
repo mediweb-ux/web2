@@ -24,10 +24,10 @@
 
 	<div class="text-center">
 		<p class="text-lg text-muted-foreground mb-6">
-			Need a custom solution that combines multiple service areas?
+			Trenger du en løsning som kombinerer ulike tjenester?
 		</p>
-		<Button href="/contact" variant="outline" size="lg">
-			Discuss Your Project
+		<Button href="/kontakt" variant="outline" size="lg">
+			Ta kontakt med oss
 		</Button>
 	</div>
 </Section>

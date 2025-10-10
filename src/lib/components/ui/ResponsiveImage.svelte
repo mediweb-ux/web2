@@ -33,12 +33,17 @@
 
 	// Generate responsive srcset based on common breakpoints
 	function generateSrcSet(baseSrc: string, format?: string): string {
+		// Check if this is a static image (starts with /images/)
+		if (baseSrc.startsWith('/images/')) {
+			// For static images, just return the original source
+			return baseSrc;
+		}
+		
 		const breakpoints = [320, 480, 640, 768, 1024, 1280, 1536];
 		const extension = format || baseSrc.split('.').pop()?.toLowerCase();
 		const basePath = baseSrc.replace(/\.[^/.]+$/, '');
 		
-		// For now, we'll use the same image but in a real implementation
-		// you'd have different sized versions
+		// For Vite-processed images, generate responsive variants
 		return breakpoints
 			.map(width => `${basePath}-${width}w.${extension} ${width}w`)
 			.join(', ');
@@ -47,6 +52,12 @@
 	// Generate sources for different formats
 	function generateSources(baseSrc: string): Array<{ srcset: string; type: string }> {
 		const sources: Array<{ srcset: string; type: string }> = [];
+		
+		// Skip format generation for static images or when formats array is empty
+		if (baseSrc.startsWith('/images/') || formats.length === 0) {
+			return sources;
+		}
+		
 		const formatSupport = checkFormatSupport();
 
 		// Add AVIF if supported and requested

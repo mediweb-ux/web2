@@ -52,7 +52,7 @@
 								</ul>
 
 								<Button 
-									href="/services/{service.slug}" 
+									href="/tjenester/{service.slug}" 
 									variant="outline" 
 									size="sm"
 									class="w-full"

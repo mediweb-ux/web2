@@ -110,7 +110,7 @@
 				<Button 
 					variant="primary" 
 					href="/"
-					ariaLabel="Go to homepage"
+					ariaLabel="Gå til forsiden"
 				>
 					G&aring; til forsiden
 				</Button>
@@ -127,7 +127,7 @@
 					<Button 
 						variant="outline" 
 						on:click={reload}
-						ariaLabel="Reload the page"
+						ariaLabel="Forsøk igjen"
 					>
 						Fors&oslash;k igjen
 					</Button>

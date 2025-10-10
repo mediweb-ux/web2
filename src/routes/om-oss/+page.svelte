@@ -6,7 +6,7 @@
 	import Card from '$lib/components/ui/Card.svelte';
 	import Button from '$lib/components/ui/Button.svelte';
 	import Icon from '$lib/components/ui/Icon.svelte';
-	import aboutBg from '$lib/assets/hero-backgrounds/bg-omoss.png';
+	import aboutBg from '$lib/assets/hero-backgrounds/bg-omoss.png?url';
 
 	const breadcrumbItems = [
 		{ label: 'Hjem', href: '/' },
@@ -162,14 +162,14 @@
 			Let's discuss how we can help bring your vision to life with our expertise and passion.
 		</p>
 		<div class="flex flex-col sm:flex-row gap-4 justify-center">
-			<Button href="/contact" size="lg">
-				Get In Touch
+			<Button href="/kontakt" size="lg">
+				Kontakt oss
 				<span class="ml-2">
 					<Icon name="arrow-right" size="sm" />
 				</span>
 			</Button>
-			<Button href="/services" variant="outline" size="lg">
-				View Our Services
+			<Button href="/tjenester" variant="outline" size="lg">
+				V&aring;re tjenester
 				<span class="ml-2">
 					<Icon name="external-link" size="sm" />
 				</span>

@@ -1,4 +1,5 @@
 import type { Service } from '$lib/types/service';
+import { portfolioImages } from '$lib/assets/images';
 
 export const services: Service[] = [
 	{
@@ -42,28 +43,36 @@ export const services: Service[] = [
 		],
 		portfolio: [
 			{
-				title: 'E-commerce Platform',
-				description: 'A modern e-commerce solution with advanced filtering, payment integration, and inventory management.',
-				image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=640&h=360&fit=crop&crop=center',
-				link: 'https://example-ecommerce.com',
-				technologies: ['SvelteKit', 'TypeScript', 'Stripe', 'Prismic CMS']
+				title: 'Medisinsk SimulatorSenter',
+				description: 'Hjemmeside for Medisinsk Simulatorsenter på St Olavs hospital.',
+				image: portfolioImages.simulatorsenteret,
+				link: 'https://www.simulatorsenteret.no',
+				technologies: ['HTML', 'CSS', 'WordPress']
 			},
 			{
-				title: 'Corporate Website',
-				description: 'Professional corporate website with multi-language support and advanced SEO optimization.',
-				image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=640&h=360&fit=crop&crop=center',
-				link: 'https://example-corporate.com',
-				technologies: ['Next.js', 'React', 'Contentful', 'Vercel']
+				title: 'Spelet om Heilag Olav',
+				description: 'Hjemmeside for frivillige og profesjonelle på Spelet om Heilag Olav.',
+				image: portfolioImages.spelet,
+				link: 'https://www.spelet.no',
+				technologies: ['HTML', 'CSS', 'WordPress']
 			},
 			{
-				title: 'SaaS Dashboard',
-				description: 'Complex dashboard application with real-time data visualization and user management.',
-				image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=640&h=360&fit=crop&crop=center',
-				technologies: ['Vue.js', 'TypeScript', 'D3.js', 'Firebase']
+				title: 'Norsk anestesiologisk forening',
+				description: 'Hjemmeside for Norsk anestesiologisk forening.',
+				image: portfolioImages.nafweb,
+				link: 'https://www.nafweb.no',
+				technologies: ['HTML', 'CSS', 'MODX']
+			},
+			{
+				title: 'MedSimNorge',
+				description: 'Hjemmeside for MedSimNorge.',
+				image: portfolioImages.medsimnorge,
+				link: 'https://www.medsimnorge.no',
+				technologies: ['HTML', 'CSS', 'Next.js', 'Prismic']
 			}
 		],
-		ctaText: 'Start Your Project',
-		ctaLink: '/contact?service=web-development'
+		ctaText: 'Kom i gang',
+		ctaLink: '/kontakt?service=webutvikling'
 	},
 	{
 		id: 'legetjenester',
@@ -89,26 +98,7 @@ export const services: Service[] = [
 				icon: 'video'
 			}
 		],
-		portfolio: [
-			{
-				title: 'Clinic Management System',
-				description: 'Complete practice management solution with scheduling, billing, and patient records.',
-				image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=640&h=360&fit=crop&crop=center',
-				technologies: ['React', 'Node.js', 'PostgreSQL', 'AWS HIPAA']
-			},
-			{
-				title: 'Telemedicine Platform',
-				description: 'Secure video consultation platform with prescription management and patient portal.',
-				image: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=640&h=360&fit=crop&crop=center',
-				technologies: ['Vue.js', 'WebRTC', 'Express.js', 'MongoDB']
-			},
-			{
-				title: 'Medical Device Dashboard',
-				description: 'Real-time monitoring dashboard for medical device data and patient vitals.',
-				image: 'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=640&h=360&fit=crop&crop=center',
-				technologies: ['Angular', 'TypeScript', 'Socket.io', 'InfluxDB']
-			}
-		],
+		portfolio: [],
 		ctaText: 'Diskuter dine behov',
 		ctaLink: '/kontakt?service=legetjenester'
 	},
@@ -117,12 +107,12 @@ export const services: Service[] = [
 		title: 'Kursvirksomhet',
 		slug: 'kursvirksomhet',
 		description: 'Kurs både fysisk og online, det siste via vår egne, intuitive læringsplattform (under konstruksjon).',
-		longDescription: 'Vi holder fysiske kurs og driver med e-læring for å skape inkluderende og lærerike kursgh custom learning management systems, interactive course platforms, and educational tools. Our solutions support various learning formats and provide comprehensive analytics for educators.',
+		longDescription: 'Vi holder fysiske kurs og driver med e-læring for å skape inkluderende og lærerike kurs.',
 		icon: 'book',
 		features: [
 			{
-				title: 'LMS Development',
-				description: 'Custom learning management systems tailored to your educational goals and requirements.',
+				title: '3-timers førstehjelpskurs',
+				description: 'Dette er vårt mest populære kurs, som passer for deg som trenger en oppfriskning eller for deg som ikke har hatt kurs før.',
 				icon: 'graduation-cap'
 			},
 			{

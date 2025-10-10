@@ -5,20 +5,20 @@
 	import PortfolioShowcase from './PortfolioShowcase.svelte';
 	import Section from '$lib/components/layout/Section.svelte';
 	import HeroSection from './HeroSection.svelte';
-	
+
 	// Import service-specific backgrounds
-	import webutviklingBg from '$lib/assets/hero-backgrounds/bg-webutvikling.png';
-	import legetjenesterBg from '$lib/assets/hero-backgrounds/bg-legetjenester.png';
-	import kursvirksomhetBg from '$lib/assets/hero-backgrounds/bg-kursvirksomhet.png';
-	import servicesBg from '$lib/assets/hero-backgrounds/services.svg';
+	import webutviklingBg from '$lib/assets/hero-backgrounds/bg-webutvikling.png?url';
+	import legetjenesterBg from '$lib/assets/hero-backgrounds/bg-legetjenester.png?url';
+	import kursvirksomhetBg from '$lib/assets/hero-backgrounds/bg-kursvirksomhet.png?url';
+	import servicesBg from '$lib/assets/hero-backgrounds/services.svg?url';
 
 	export let service: Service;
 
 	// Map service slugs to background images
 	const backgroundImages: Record<string, string> = {
-		'webutvikling': webutviklingBg,
-		'legetjenester': legetjenesterBg,
-		'kursvirksomhet': kursvirksomhetBg
+		webutvikling: webutviklingBg,
+		legetjenester: legetjenesterBg,
+		kursvirksomhet: kursvirksomhetBg
 	};
 
 	// Get background image for current service, fallback to generic services background
@@ -29,7 +29,7 @@
 <HeroSection
 	title={service.title}
 	subtitle={service.longDescription}
-	backgroundImage={backgroundImage}
+	{backgroundImage}
 	overlayOpacity={0.5}
 	minHeight="min-h-[500px]"
 >
@@ -46,9 +46,7 @@
 <!-- Features Section -->
 <Section class="py-16 bg-muted/50">
 	<div class="max-w-6xl mx-auto">
-		<h2 class="text-3xl font-bold text-center text-foreground mb-12">
-			Hva vi tilbyr
-		</h2>
+		<h2 class="text-3xl font-bold text-center text-foreground mb-12">Hva vi tilbyr</h2>
 		<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
 			{#each service.features as feature}
 				<div class="text-center">
@@ -71,11 +69,9 @@
 
 <!-- Portfolio Section -->
 {#if service.portfolio.length > 0}
-	<Section class="py-16">
+	<Section class="py-16" ariaLabel="Portfolio">
 		<div class="max-w-6xl mx-auto">
-			<h2 class="text-3xl font-bold text-center text-foreground mb-12">
-				Tidligere arbeid
-			</h2>
+			<h2 class="text-3xl font-bold text-center text-foreground mb-12">Tidligere arbeid</h2>
 			<PortfolioShowcase items={service.portfolio} />
 		</div>
 	</Section>
@@ -84,13 +80,17 @@
 <!-- CTA Section -->
 <Section class="py-16 bg-primary text-primary-foreground">
 	<div class="text-center max-w-4xl mx-auto">
-		<h2 class="text-3xl font-bold mb-6">
-			Klar til &aring; starte?
-		</h2>
+		<h2 class="text-3xl font-bold mb-6">Klar til &aring; starte?</h2>
 		<p class="text-xl mb-8 opacity-90">
-			La oss ta en prat, slik at vi kan hjelpe deg &aring; dekke dine behov med v&aring;r ekspertise innen {service.title.toLowerCase()}.
+			La oss ta en prat, slik at vi kan hjelpe deg &aring; dekke dine behov med v&aring;r ekspertise
+			innen {service.title.toLowerCase()}.
 		</p>
-		<Button href="/contact" variant="secondary" size="lg">
+		<Button
+			href="/kontakt"
+			variant="secondary"
+			size="lg"
+			class="!bg-white !text-gray-900 !border-2 !border-gray-900 hover:!bg-gray-50 hover:!text-gray-900 font-semibold shadow-lg"
+		>
 			{service.ctaText}
 		</Button>
 	</div>

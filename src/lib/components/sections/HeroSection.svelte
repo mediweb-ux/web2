@@ -10,28 +10,31 @@
 	export let className: string = '';
 
 	// Create the background style
-	$: backgroundStyle = backgroundImage 
+	$: backgroundStyle = backgroundImage
 		? `background-image: url('${backgroundImage}'); background-size: cover; background-position: center; background-repeat: no-repeat;`
 		: '';
 
-	$: containerClasses = [
-		'relative',
-		minHeight,
-		'flex items-center justify-center',
-		className
-	].filter(Boolean).join(' ');
 
-	$: textClasses = textAlign === 'center' 
-		? 'text-center max-w-4xl mx-auto'
-		: textAlign === 'right'
-		? 'text-right max-w-4xl ml-auto'
-		: 'text-left max-w-4xl mr-auto';
+
+	$: containerClasses = ['relative', minHeight, 'flex items-center justify-center', className]
+		.filter(Boolean)
+		.join(' ');
+
+	$: textClasses =
+		textAlign === 'center'
+			? 'text-center max-w-4xl mx-auto'
+			: textAlign === 'right'
+				? 'text-right max-w-4xl ml-auto'
+				: 'text-left max-w-4xl mr-auto';
 </script>
 
-<Section className={containerClasses} containerSize="full" style={backgroundStyle}>
+<Section padding="none" className={containerClasses} containerSize="full">
+	<!-- Background image div -->
+	<div class="absolute inset-0" style={backgroundStyle}></div>
+
 	<!-- Background overlay for better text readability -->
 	{#if backgroundImage}
-		<div 
+		<div
 			class="absolute inset-0 bg-black transition-opacity duration-300"
 			style="opacity: {overlayOpacity}"
 		></div>
@@ -48,7 +51,7 @@
 					{subtitle}
 				</p>
 			{/if}
-			
+
 			<!-- Slot for additional content like buttons -->
 			<slot />
 		</div>
@@ -57,7 +60,8 @@
 
 <style>
 	/* Ensure text is readable on all backgrounds */
-	h1, p {
+	h1,
+	p {
 		text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 	}
 </style>
