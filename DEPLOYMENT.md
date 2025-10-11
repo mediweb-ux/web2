@@ -29,6 +29,20 @@ npm install
 npm ci --force
 ```
 
+### 2. 404 Errors on All Pages (Static Hosting)
+
+**Error:** Header and footer show but all pages return 404 errors
+
+**Cause:** SvelteKit routing configuration incompatible with static hosting
+
+**Solution:**
+The project is configured with:
+- `trailingSlash = 'never'` in `+layout.js`
+- `fallback: '404.html'` in `svelte.config.js`
+- Both directory structure (`/page/index.html`) and flat files (`/page.html`)
+
+This ensures compatibility with various static hosting platforms.
+
 ### 2. Missing Dependencies
 
 **Error:** `Missing: [package-name] from lock file`

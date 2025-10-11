@@ -31,5 +31,5 @@ COPY --from=builder /app/build ./build
 # Expose port
 EXPOSE 3000
 
-# Start the application
-CMD ["serve", "build", "-s", "-l", "3000"]
+# Start the application with proper SPA configuration
+CMD ["serve", "build", "-s", "-l", "3000", "--single"]

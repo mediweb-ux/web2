@@ -1,0 +1,9 @@
+# Netlify redirects for SPA fallback
+/*    /404.html   404
+
+# Handle trailing slashes
+/om-oss/    /om-oss.html    200
+/tjenester/    /tjenester.html    200
+/kontakt/    /kontakt.html    200
+/personvern/    /personvern.html    200
+/brukervilkar/    /brukervilkar.html    200

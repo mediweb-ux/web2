@@ -13,9 +13,9 @@ const config = {
 			// Output directory for static files
 			pages: 'build',
 			assets: 'build',
-			fallback: 'index.html', // Enable SPA fallback for dynamic routes
+			fallback: '404.html', // Use 404.html instead of index.html for better static hosting
 			precompress: false,
-			strict: false // Allow some routes to not be prerendered
+			strict: true // Ensure all routes are prerendered
 		}),
 
 		// Prerender configuration for static generation
