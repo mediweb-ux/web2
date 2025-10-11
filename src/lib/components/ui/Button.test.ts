@@ -34,13 +34,13 @@ describe('Button Component', () => {
 	it('applies small size classes', () => {
 		const { container } = render(Button, { props: { size: 'sm' } });
 		const button = container.querySelector('button');
-		expect(button).toHaveClass('px-3', 'py-1.5', 'text-sm');
+		expect(button).toHaveClass('px-3', 'py-1.5', 'text-body-sm');
 	});
 
 	it('applies large size classes', () => {
 		const { container } = render(Button, { props: { size: 'lg' } });
 		const button = container.querySelector('button');
-		expect(button).toHaveClass('px-6', 'py-3', 'text-lg');
+		expect(button).toHaveClass('px-6', 'py-3', 'text-body-lg');
 	});
 
 	it('is disabled when disabled prop is true', () => {
@@ -56,6 +56,35 @@ describe('Button Component', () => {
 		const spinner = button?.querySelector('svg');
 		expect(spinner).toBeInTheDocument();
 		expect(spinner).toHaveClass('animate-spin');
+		expect(spinner).toHaveAttribute('aria-hidden', 'true');
+	});
+
+	it('shows loading spinner in anchor element when loading and href provided', () => {
+		const { container } = render(Button, { props: { loading: true, href: '/test' } });
+		const link = container.querySelector('a');
+		const spinner = link?.querySelector('svg');
+		expect(spinner).toBeInTheDocument();
+		expect(spinner).toHaveClass('animate-spin');
+		expect(spinner).toHaveAttribute('aria-hidden', 'true');
+	});
+
+	it('loading spinner has correct positioning classes', () => {
+		const { container } = render(Button, { props: { loading: true } });
+		const button = container.querySelector('button');
+		const spinner = button?.querySelector('svg');
+		expect(spinner).toHaveClass('-ml-1', 'mr-2');
+	});
+
+	it('loading spinner works across all button variants', () => {
+		const variants = ['primary', 'secondary', 'outline'] as const;
+		
+		variants.forEach(variant => {
+			const { container } = render(Button, { props: { loading: true, variant } });
+			const button = container.querySelector('button');
+			const spinner = button?.querySelector('svg');
+			expect(spinner).toBeInTheDocument();
+			expect(spinner).toHaveClass('animate-spin');
+		});
 	});
 
 	it('renders as anchor when href is provided', () => {

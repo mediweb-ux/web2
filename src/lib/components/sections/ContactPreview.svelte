@@ -29,10 +29,10 @@
 	];
 </script>
 
-<Section id="contact-preview" class="py-16 md:py-24 bg-muted">
+<Section id="contact-preview" class="py-16 md:py-24 bg-muted" ariaLabel="Kontakt">
 	<div class="text-center mb-16">
 		<h2 class="text-3xl md:text-4xl font-bold text-foreground mb-4">
-			Get In Touch
+			Kontakt oss
 		</h2>
 		<p class="text-xl text-muted-foreground max-w-3xl mx-auto">
 			Ready to start your project? We'd love to hear from you. Choose the method that works best for you.
@@ -62,8 +62,8 @@
 	</div>
 
 	<div class="text-center">
-		<Button href="/contact" variant="primary" size="lg">
-			Send Us a Message
+		<Button href="/kontakt" variant="primary" size="lg">
+			Send oss en melding
 		</Button>
 	</div>
 </Section>

@@ -6,6 +6,7 @@
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
+		"start": "serve build -s -l 3000",
 		"build:analyze": "vite build --mode analyze",
 		"build:production": "npm run clean && cross-env NODE_ENV=production BUILD_TARGET=production vite build",
 		"build:production:full": "npm run clean && npm run check && npm run test:run && npm run lint && cross-env NODE_ENV=production BUILD_TARGET=production vite build",
@@ -67,6 +68,8 @@
 		"vitest": "^3.2.4"
 	},
 	"dependencies": {
-		"resend": "^6.1.2"
+		"heroicons": "^2.2.0",
+		"resend": "^6.1.2",
+		"serve": "^14.2.3"
 	}
 }

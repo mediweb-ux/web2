@@ -2,7 +2,6 @@
 	import HeroSection from '$lib/components/sections/HeroSection.svelte';
 	import Button from '$lib/components/ui/Button.svelte';
 	import ServicesOverview from '$lib/components/sections/ServicesOverview.svelte';
-	import About from '$lib/components/sections/About.svelte';
 	import ContactPreview from '$lib/components/sections/ContactPreview.svelte';
 	import SEO from '$lib/components/SEO.svelte';
 	import homeBg from '$lib/assets/hero-backgrounds/bg-home.png?url';
@@ -28,7 +27,5 @@
 </HeroSection>
 
 <ServicesOverview />
-
-<About />
 
 <ContactPreview />

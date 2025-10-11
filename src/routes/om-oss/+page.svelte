@@ -60,6 +60,16 @@
 			name: 'SQL',
 			description: 'Nødvendig for å håndtere databaser på backend',
 			icon: 'database'
+		},
+		{
+			name: 'Svelte/SvelteKit',
+			description: 'Moderne frontend-rammeverk som brukes for denne nettsiden',
+			icon: 'svelte'
+		},
+		{
+			name: 'React/Next.js',
+			description: 'Populært JavaScript-rammeverk for interaktive webapplikasjoner',
+			icon: 'react'
 		}
 	];
 </script>
@@ -150,7 +160,7 @@
 		<p class="text-body-lg text-muted-foreground text-center mb-12 max-w-3xl mx-auto">
 			Fra de første stegene med BASIC til dagens moderne webutviklingsverktøy - her er noen av teknologiene som har formet vår reise.
 		</p>
-		<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+		<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
 			{#each technologies as tech}
 				<Card class="p-6 text-center h-full">
 					<div class="flex justify-center mb-4">

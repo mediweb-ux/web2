@@ -18,14 +18,24 @@
 		xl: 'w-8 h-8'
 	};
 
-	$: iconPaths = {
+	// Heroicons path data (extracted from heroicons/24/outline)
+	$: heroiconPaths = {
+		'bars-3': 'M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5',
+		'x-mark': 'M6 18 18 6M6 6l12 12',
+		'chevron-down': 'm19.5 8.25-7.5 7.5-7.5-7.5',
+		'sun': 'M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z',
+		'moon': 'M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z',
+		'loading': 'M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99',
+		// Aliases for backward compatibility
+		'menu': 'M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5', // Same as bars-3
+		'x': 'M6 18 18 6M6 6l12 12', // Same as x-mark
+	};
+
+	// Legacy icon paths for backward compatibility (20x20 viewBox)
+	$: legacyIconPaths = {
 		// Common icons used throughout the site
 		check:
 			'M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z',
-		x: 'M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z',
-		menu: 'M3 12h18m-9-9v18',
-		sun: 'M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z',
-		moon: 'M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z',
 		code: 'M13 6l3 6-3 6M7 6l-3 6 3 6',
 		heart:
 			'M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z',
@@ -39,10 +49,7 @@
 		'arrow-right': 'M13 7l5 5m0 0l-5 5m5-5H6',
 		'chevron-right': 'M9 5l7 7-7 7',
 		'chevron-left': 'M15 5l-7 7 7 7',
-		'chevron-down': 'M5 9l7 7 7-7',
 		'chevron-up': 'M5 15l7-7 7 7',
-		loading:
-			'M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z',
 		target: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z',
 		users:
 			'M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m-13.8 0A6 6 0 003 15v6m0 0v-5.197',
@@ -71,41 +78,40 @@
 		'message-circle':
 			'M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z',
 		'map-pin':
-			'M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z M15 11a3 3 0 11-6 0 3 3 0 016 0z'
+			'M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z M15 11a3 3 0 11-6 0 3 3 0 016 0z',
+		// Missing icons for Om oss page
+		briefcase:
+			'M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z',
+		building:
+			'M4 21V9l8-4 8 4v12a1 1 0 01-1 1H5a1 1 0 01-1-1zM9 9h1a1 1 0 011 1v1a1 1 0 01-1 1H9a1 1 0 01-1-1v-1a1 1 0 011-1zM9 14h1a1 1 0 011 1v1a1 1 0 01-1 1H9a1 1 0 01-1-1v-1a1 1 0 011-1zM14 9h1a1 1 0 011 1v1a1 1 0 01-1 1h-1a1 1 0 01-1-1v-1a1 1 0 011-1z',
+		star: 'M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z',
+		terminal:
+			'M7 7l3.5 3.5-3.5 3.5M13 14h4M5 21h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2z',
+		database:
+			'M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4',
+		// Modern framework icons
+		svelte:
+			'M15.62 3.596L7.815 1.336a2.177 2.177 0 00-2.387.648 2.177 2.177 0 00-.648 2.387l2.26 7.805a2.177 2.177 0 002.387.648 2.177 2.177 0 00.648-2.387L7.815 2.632l7.805 2.26a2.177 2.177 0 002.387-.648 2.177 2.177 0 00.648-2.387L16.395 9.662a2.177 2.177 0 00-2.387-.648 2.177 2.177 0 00-.648 2.387l2.26 7.805M10 18a8 8 0 100-16 8 8 0 000 16z',
+		react:
+			'M10 13.5a1.5 1.5 0 100-3 1.5 1.5 0 000 3zM10 18c4.418 0 8-1.79 8-4s-3.582-4-8-4-8 1.79-8 4 3.582 4 8 4zM6.09 15.5c2.209-3.827 5.603-6.5 7.91-6.5s5.701 2.673 7.91 6.5c-2.209 3.827-5.603 6.5-7.91 6.5s-5.701-2.673-7.91-6.5zM13.91 15.5c2.209 3.827 2.209 6.5 0 6.5s-5.701-2.673-7.91-6.5c2.209-3.827 5.603-6.5 7.91-6.5s2.209 2.673 0 6.5z'
 	};
 
-	$: path = iconPaths[name as keyof typeof iconPaths];
+	// Determine if this is a Heroicon or legacy icon
+	$: isHeroicon = heroiconPaths.hasOwnProperty(name);
+	$: path = isHeroicon 
+		? heroiconPaths[name as keyof typeof heroiconPaths] 
+		: legacyIconPaths[name as keyof typeof legacyIconPaths];
+	$: viewBox = isHeroicon ? '0 0 24 24' : '0 0 20 20';
+	$: strokeWidth = isHeroicon ? '1.5' : '2';
 	$: hasTitle = title || ariaLabel;
 </script>
 
 <svg
 	class="{sizeClasses[size]} {className}"
-	fill={['loading', 'menu', 'chevron-right', 'chevron-left', 'chevron-down', 'chevron-up'].includes(
-		name
-	)
-		? 'none'
-		: 'currentColor'}
-	stroke={[
-		'loading',
-		'menu',
-		'chevron-right',
-		'chevron-left',
-		'chevron-down',
-		'chevron-up'
-	].includes(name)
-		? 'currentColor'
-		: 'none'}
-	stroke-width={[
-		'loading',
-		'menu',
-		'chevron-right',
-		'chevron-left',
-		'chevron-down',
-		'chevron-up'
-	].includes(name)
-		? '2'
-		: '0'}
-	viewBox="0 0 20 20"
+	fill={isHeroicon ? 'none' : 'currentColor'}
+	stroke={isHeroicon ? 'currentColor' : 'none'}
+	stroke-width={isHeroicon ? strokeWidth : '0'}
+	viewBox={viewBox}
 	xmlns="http://www.w3.org/2000/svg"
 	style="color: {color}"
 	aria-hidden={ariaHidden ? 'true' : hasTitle ? 'false' : 'true'}
@@ -116,63 +122,15 @@
 		<title>{title}</title>
 	{/if}
 
-	{#if name === 'loading'}
-		<circle class="opacity-25" cx="10" cy="10" r="8" stroke="currentColor" stroke-width="2"
-		></circle>
+	{#if isHeroicon}
+		<!-- Heroicons use stroke-based rendering -->
 		<path
-			class="opacity-75"
-			fill="currentColor"
-			d="M2 10a8 8 0 018-8V0C4.477 0 0 4.477 0 10h2zm2 5.291A7.962 7.962 0 012 10H0c0 3.042 1.135 5.824 3 7.938l1-2.647z"
-		></path>
-	{:else if name === 'menu'}
-		<path
-			stroke="currentColor"
 			stroke-linecap="round"
 			stroke-linejoin="round"
-			stroke-width="2"
-			d="M4 6h16M4 12h16M4 18h16"
+			d={path}
 		/>
-	{:else if name === 'chevron-right'}
-		<path
-			stroke="currentColor"
-			stroke-linecap="round"
-			stroke-linejoin="round"
-			stroke-width="2"
-			d="M9 5l7 7-7 7"
-		/>
-	{:else if name === 'chevron-left'}
-		<path
-			stroke="currentColor"
-			stroke-linecap="round"
-			stroke-linejoin="round"
-			stroke-width="2"
-			d="M15 5l-7 7 7 7"
-		/>
-	{:else if name === 'chevron-down'}
-		<path
-			stroke="currentColor"
-			stroke-linecap="round"
-			stroke-linejoin="round"
-			stroke-width="2"
-			d="M5 9l7 7 7-7"
-		/>
-	{:else if name === 'chevron-up'}
-		<path
-			stroke="currentColor"
-			stroke-linecap="round"
-			stroke-linejoin="round"
-			stroke-width="2"
-			d="M5 15l7-7 7 7"
-		/>
-	{:else if name === 'sun'}
-		<path
-			fill-rule="evenodd"
-			d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
-			clip-rule="evenodd"
-		/>
-	{:else if name === 'moon'}
-		<path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
 	{:else if path}
+		<!-- Legacy icons use fill-based rendering -->
 		<path fill-rule="evenodd" d={path} clip-rule="evenodd" />
 	{:else}
 		<!-- Fallback for unknown icons -->

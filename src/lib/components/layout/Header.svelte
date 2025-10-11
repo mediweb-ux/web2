@@ -5,6 +5,7 @@
 	import { Analytics } from '$lib/utils/analytics';
 	import ThemeToggle from '../ui/ThemeToggle.svelte';
 	import Navigation from './Navigation.svelte';
+	import Icon from '../ui/Icon.svelte';
 
 	// Import logo images
 	import logoLight from '$lib/assets/MediWeb_logo_crop.png';
@@ -133,37 +134,19 @@
 				>
 					<span class="sr-only">{mobileMenuOpen ? 'Lukk meny' : 'Åpne meny'}</span>
 					<!-- Hamburger icon -->
-					<svg
-						class="block h-6 w-6 {mobileMenuOpen ? 'hidden' : 'block'}"
-						xmlns="http://www.w3.org/2000/svg"
-						fill="none"
-						viewBox="0 0 24 24"
-						stroke="currentColor"
-						aria-hidden="true"
-					>
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							d="M4 6h16M4 12h16M4 18h16"
-						/>
-					</svg>
+					<Icon
+						name="bars-3"
+						size="lg"
+						class="block {mobileMenuOpen ? 'hidden' : 'block'}"
+						ariaHidden={true}
+					/>
 					<!-- Close icon -->
-					<svg
-						class="block h-6 w-6 {mobileMenuOpen ? 'block' : 'hidden'}"
-						xmlns="http://www.w3.org/2000/svg"
-						fill="none"
-						viewBox="0 0 24 24"
-						stroke="currentColor"
-						aria-hidden="true"
-					>
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							d="M6 18L18 6M6 6l12 12"
-						/>
-					</svg>
+					<Icon
+						name="x-mark"
+						size="lg"
+						class="block {mobileMenuOpen ? 'block' : 'hidden'}"
+						ariaHidden={true}
+					/>
 				</button>
 			</div>
 		</div>

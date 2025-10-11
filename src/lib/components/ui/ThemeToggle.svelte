@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { theme, prefersReducedMotion } from '$lib/stores';
 	import { onMount } from 'svelte';
+	import Icon from './Icon.svelte';
 
 	// Props
 	export let size: 'sm' | 'md' | 'lg' = 'md';
@@ -70,64 +71,31 @@
 	on:keydown={handleKeydown}
 	disabled={!mounted || isToggling}
 >
-	<!-- Sun Icon (Light Mode) -->
-	<svg
-		class="sun-icon"
-		class:visible={currentTheme === 'light'}
-		width="20"
-		height="20"
-		viewBox="0 0 24 24"
-		fill="none"
-		stroke="currentColor"
-		stroke-width="2"
-		stroke-linecap="round"
-		stroke-linejoin="round"
-		aria-hidden="true"
-	>
-		<circle cx="12" cy="12" r="5" />
-		<path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
-	</svg>
-
-	<!-- Moon Icon (Dark Mode) -->
-	<svg
-		class="moon-icon"
-		class:visible={currentTheme === 'dark'}
-		width="20"
-		height="20"
-		viewBox="0 0 24 24"
-		fill="none"
-		stroke="currentColor"
-		stroke-width="2"
-		stroke-linecap="round"
-		stroke-linejoin="round"
-		aria-hidden="true"
-	>
-		<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-	</svg>
+	<!-- Theme Icon -->
+	{#if currentTheme === 'light'}
+		<Icon
+			name="sun"
+			size="md"
+			class="theme-icon sun-icon"
+			ariaHidden={true}
+		/>
+	{:else}
+		<Icon
+			name="moon"
+			size="md"
+			class="theme-icon moon-icon"
+			ariaHidden={true}
+		/>
+	{/if}
 
 	<!-- Loading indicator -->
 	{#if isToggling}
-		<div class="loading-spinner" aria-hidden="true">
-			<svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-				<circle
-					cx="12"
-					cy="12"
-					r="10"
-					stroke="currentColor"
-					stroke-width="2"
-					stroke-linecap="round"
-					stroke-dasharray="32"
-					stroke-dashoffset="32"
-				>
-					<animate
-						attributeName="stroke-dashoffset"
-						values="32;0;32"
-						dur="1s"
-						repeatCount="indefinite"
-					/>
-				</circle>
-			</svg>
-		</div>
+		<Icon
+			name="loading"
+			size="sm"
+			class="loading-spinner"
+			ariaHidden={true}
+		/>
 	{/if}
 
 	<!-- Screen reader text -->
@@ -187,25 +155,16 @@
 	}
 
 	/* Icon animations */
-	.sun-icon,
-	.moon-icon {
-		position: absolute;
-		opacity: 0;
-		transform: scale(0.8) rotate(-90deg);
+	.theme-icon {
 		transition: all 0.3s ease;
-	}
-
-	.sun-icon.visible,
-	.moon-icon.visible {
-		opacity: 1;
 		transform: scale(1) rotate(0deg);
 	}
 
-	.sun-icon.visible {
+	.sun-icon {
 		color: rgb(251 191 36); /* yellow-400 */
 	}
 
-	.moon-icon.visible {
+	.moon-icon {
 		color: rgb(147 197 253); /* blue-300 */
 	}
 
@@ -216,12 +175,11 @@
 		transition: opacity 0.2s ease;
 	}
 
-	.toggling .loading-spinner {
+	.toggling :global(.loading-spinner) {
 		opacity: 1;
 	}
 
-	.toggling .sun-icon,
-	.toggling .moon-icon {
+	.toggling :global(.theme-icon) {
 		opacity: 0;
 	}
 
@@ -236,25 +194,13 @@
 	/* Reduced motion support */
 	@media (prefers-reduced-motion: reduce) {
 		.theme-toggle,
-		.sun-icon,
-		.moon-icon,
+		.theme-icon,
 		.loading-spinner {
 			transition: none;
 		}
 
 		.theme-toggle:hover {
 			transform: none;
-		}
-
-		.sun-icon,
-		.moon-icon {
-			transform: scale(1) rotate(0deg);
-		}
-
-		.sun-icon:not(.visible),
-		.moon-icon:not(.visible) {
-			transform: scale(1) rotate(0deg);
-			opacity: 0;
 		}
 	}
 
@@ -264,8 +210,7 @@
 			border-width: 2px;
 		}
 
-		.sun-icon.visible,
-		.moon-icon.visible {
+		.theme-icon {
 			color: hsl(var(--foreground));
 		}
 	}

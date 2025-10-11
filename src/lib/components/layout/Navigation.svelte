@@ -1,18 +1,12 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import { Analytics } from '$lib/utils/analytics';
+	import Icon from '$lib/components/ui/Icon.svelte';
 
 	export let mobile = false;
 
 	let showServicesDropdown = false;
 	let dropdownTimeout: ReturnType<typeof setTimeout>;
-
-	// Navigation items
-	const navItems = [
-		{ href: '/', label: 'Hjem' },
-		{ href: '/om-oss', label: 'Om oss' },
-		{ href: '/kontakt', label: 'Kontakt' }
-	];
 
 	// Services for dropdown
 	const services = [
@@ -105,40 +99,35 @@
 
 <nav aria-label={mobile ? 'Mobil navigasjon' : 'Navigasjon'}>
 	<ul class={mobile ? 'flex flex-col space-y-1' : 'flex items-center space-x-8'}>
-		{#each navItems as item, index}
-			<li>
-				<a
-					href={item.href}
-					on:click={() =>
-						Analytics.trackNavigation(
-							item.label.toLowerCase(),
-							mobile ? 'mobile_nav' : 'desktop_nav'
-						)}
-					class={`
-						${
-							mobile
-								? 'block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200'
-								: 'text-sm font-medium transition-colors duration-200'
-						}
-						${
-							isCurrentPage(item.href)
-								? mobile
-									? 'bg-primary text-primary-foreground'
-									: 'text-primary border-b-2 border-primary'
-								: mobile
-									? 'text-foreground hover:bg-accent hover:text-accent-foreground'
-									: 'text-muted-foreground hover:text-foreground'
-						}
-						focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-sm
-					`}
-					aria-current={isCurrentPage(item.href) ? 'page' : undefined}
-					on:keydown={(event) => handleKeydown(event, index)}
-					tabindex="0"
-				>
-					{item.label}
-				</a>
-			</li>
-		{/each}
+		<!-- Home -->
+		<li>
+			<a
+				href="/"
+				on:click={() => Analytics.trackNavigation('hjem', mobile ? 'mobile_nav' : 'desktop_nav')}
+				class={`
+					${
+						mobile
+							? 'block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200'
+							: 'text-sm font-medium transition-colors duration-200'
+					}
+					${
+						isCurrentPage('/')
+							? mobile
+								? 'bg-primary text-primary-foreground'
+								: 'text-primary border-b-2 border-primary'
+							: mobile
+								? 'text-foreground hover:bg-accent hover:text-accent-foreground'
+								: 'text-muted-foreground hover:text-foreground'
+					}
+					focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-sm
+				`}
+				aria-current={isCurrentPage('/') ? 'page' : undefined}
+				on:keydown={(event) => handleKeydown(event, 0)}
+				tabindex="0"
+			>
+				Hjem
+			</a>
+		</li>
 
 		<!-- Services Dropdown -->
 		<li class="relative" data-dropdown="services">
@@ -161,21 +150,13 @@
 				>
 					<span class="flex items-center justify-between">
 						Tjenester
-						<svg
-							class="ml-2 h-4 w-4 transition-transform duration-200 {showServicesDropdown
+						<Icon
+							name="chevron-down"
+							size="sm"
+							class="ml-2 transition-transform duration-200 {showServicesDropdown
 								? 'rotate-180'
 								: ''}"
-							fill="none"
-							stroke="currentColor"
-							viewBox="0 0 24 24"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M19 9l-7 7-7-7"
-							/>
-						</svg>
+						/>
 					</span>
 				</button>
 
@@ -225,21 +206,13 @@
 						aria-haspopup="true"
 					>
 						Tjenester
-						<svg
-							class="ml-1 h-4 w-4 transition-transform duration-200 {showServicesDropdown
+						<Icon
+							name="chevron-down"
+							size="sm"
+							class="ml-1 transition-transform duration-200 {showServicesDropdown
 								? 'rotate-180'
 								: ''}"
-							fill="none"
-							stroke="currentColor"
-							viewBox="0 0 24 24"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M19 9l-7 7-7-7"
-							/>
-						</svg>
+						/>
 					</button>
 
 					{#if showServicesDropdown}
@@ -279,6 +252,66 @@
 					{/if}
 				</div>
 			{/if}
+		</li>
+
+		<!-- Om oss -->
+		<li>
+			<a
+				href="/om-oss"
+				on:click={() => Analytics.trackNavigation('om oss', mobile ? 'mobile_nav' : 'desktop_nav')}
+				class={`
+					${
+						mobile
+							? 'block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200'
+							: 'text-sm font-medium transition-colors duration-200'
+					}
+					${
+						isCurrentPage('/om-oss')
+							? mobile
+								? 'bg-primary text-primary-foreground'
+								: 'text-primary border-b-2 border-primary'
+							: mobile
+								? 'text-foreground hover:bg-accent hover:text-accent-foreground'
+								: 'text-muted-foreground hover:text-foreground'
+					}
+					focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-sm
+				`}
+				aria-current={isCurrentPage('/om-oss') ? 'page' : undefined}
+				on:keydown={(event) => handleKeydown(event, 2)}
+				tabindex="0"
+			>
+				Om oss
+			</a>
+		</li>
+
+		<!-- Kontakt -->
+		<li>
+			<a
+				href="/kontakt"
+				on:click={() => Analytics.trackNavigation('kontakt', mobile ? 'mobile_nav' : 'desktop_nav')}
+				class={`
+					${
+						mobile
+							? 'block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200'
+							: 'text-sm font-medium transition-colors duration-200'
+					}
+					${
+						isCurrentPage('/kontakt')
+							? mobile
+								? 'bg-primary text-primary-foreground'
+								: 'text-primary border-b-2 border-primary'
+							: mobile
+								? 'text-foreground hover:bg-accent hover:text-accent-foreground'
+								: 'text-muted-foreground hover:text-foreground'
+					}
+					focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-sm
+				`}
+				aria-current={isCurrentPage('/kontakt') ? 'page' : undefined}
+				on:keydown={(event) => handleKeydown(event, 3)}
+				tabindex="0"
+			>
+				Kontakt
+			</a>
 		</li>
 	</ul>
 </nav>

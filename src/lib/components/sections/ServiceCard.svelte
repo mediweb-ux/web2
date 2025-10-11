@@ -33,7 +33,7 @@
 	
 	<div class="mt-auto space-y-3">
 		<Button href="/services/{service.slug}" variant="primary" class="w-full">
-			Les mer om {service.title}
+			Mer om {service.title}
 			<Icon name="arrow-right" size="sm" class="ml-2" />
 		</Button>
 		<Button href={service.ctaLink} variant="outline" class="w-full">
