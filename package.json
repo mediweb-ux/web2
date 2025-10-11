@@ -23,6 +23,7 @@
 		"test:performance": "vitest run src/lib/utils/performance.test.ts src/lib/utils/preload.test.ts",
 		"test:accessibility": "vitest run src/lib/components/accessibility/",
 		"test:a11y": "npm run test:accessibility",
+		"verify:deployment": "node scripts/verify-deployment.js",
 		"lint": "eslint .",
 		"lint:fix": "eslint . --fix",
 		"format": "prettier --write .",

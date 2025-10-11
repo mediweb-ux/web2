@@ -31,6 +31,7 @@
 		"src/vitest.d.ts",
 		"src/types/vitest-globals.d.ts",
 		"src/types/test-globals.d.ts",
+		"src/types/vitest.d.ts",
 		"vitest.config.ts"
 	],
 	"exclude": ["node_modules/**", ".svelte-kit/**", "build/**"]

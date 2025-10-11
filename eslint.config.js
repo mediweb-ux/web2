@@ -21,7 +21,8 @@ export default [
 				require: 'readonly',
 				module: 'readonly',
 				__dirname: 'readonly',
-				__filename: 'readonly'
+				__filename: 'readonly',
+				console: 'readonly'
 			}
 		},
 		plugins: {

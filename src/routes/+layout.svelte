@@ -14,12 +14,12 @@
 	// Initialize theme and analytics on mount
 	onMount(() => {
 		const cleanup = theme.init();
-		
+
 		// Initialize Google Analytics
 		if (data?.measurementId) {
 			Analytics.init(data.measurementId);
 		}
-		
+
 		return cleanup;
 	});
 </script>
