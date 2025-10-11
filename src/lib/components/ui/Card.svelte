@@ -1,4 +1,6 @@
 <script lang="ts">
+	import ResponsiveImage from './ResponsiveImage.svelte';
+	
 	// Make all props optional and provide defaults
 	export let title: string = '';
 	export let description: string = '';
@@ -21,7 +23,14 @@
 		<a {href} class="block focus:outline-none" aria-describedby={`${title.replace(/\s+/g, '-').toLowerCase()}-description`}>
 			{#if image}
 				<div class="mb-4">
-					<img src={image} alt={imageAlt} class="w-full h-48 object-cover rounded-md" loading="lazy" />
+					<ResponsiveImage
+						src={image}
+						alt={imageAlt}
+						className="w-full h-48 object-cover rounded-md"
+						aspectRatio="16/9"
+						sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+						formats={[]}
+					/>
 				</div>
 			{/if}
 			{#if title}
@@ -51,7 +60,14 @@
 	{:else}
 		{#if image}
 			<div class="mb-4">
-				<img src={image} alt={imageAlt} class="w-full h-48 object-cover rounded-md" loading="lazy" />
+				<ResponsiveImage
+					src={image}
+					alt={imageAlt}
+					className="w-full h-48 object-cover rounded-md"
+					aspectRatio="16/9"
+					sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+					formats={[]}
+				/>
 			</div>
 		{/if}
 		{#if title}

@@ -5,6 +5,7 @@
 	import PortfolioShowcase from './PortfolioShowcase.svelte';
 	import Section from '$lib/components/layout/Section.svelte';
 	import HeroSection from './HeroSection.svelte';
+	import ResponsiveImage from '$lib/components/ui/ResponsiveImage.svelte';
 
 	// Import service-specific backgrounds
 	import webutviklingBg from '$lib/assets/hero-backgrounds/bg-webutvikling.png?url';
@@ -67,21 +68,25 @@
 						{step.subtitle}
 					</h3>
 				</div>
-				
+
 				<div class="max-w-4xl mx-auto">
 					{#each step.content as paragraph}
 						<p class="text-body-lg text-muted-foreground leading-relaxed mb-6">{@html paragraph}</p>
 					{/each}
-					
+
 					{#if step.image}
 						<div class="flex justify-center my-12">
-							<img
-								src={step.image}
-								alt="Illustrasjon for {step.subtitle}"
-								class="rounded-md shadow-md max-w-full h-auto"
-								style="max-width: 550px; max-height: 350px;"
-								loading="lazy"
-							/>
+							<div class="max-w-[550px] w-full">
+								<ResponsiveImage
+									src={step.image}
+									alt="Illustrasjon for {step.subtitle}"
+									className="rounded-md shadow-md w-full h-auto"
+									aspectRatio="16/10"
+									sizes="(max-width: 768px) 100vw, (max-width: 1024px) 80vw, 550px"
+									objectFit="cover"
+									formats={[]}
+								/>
+							</div>
 						</div>
 					{/if}
 				</div>
@@ -118,7 +123,9 @@
 {#if service.portfolio.length > 0}
 	<Section class="py-8" ariaLabel="Portfolio">
 		<div class="max-w-6xl mx-auto">
-			<h2 class="text-responsive-3xl font-bold text-center text-foreground mb-12">Tidligere arbeid</h2>
+			<h2 class="text-responsive-3xl font-bold text-center text-foreground mb-12">
+				Tidligere arbeid
+			</h2>
 			<PortfolioShowcase items={service.portfolio} />
 		</div>
 	</Section>
