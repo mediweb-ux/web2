@@ -7,7 +7,17 @@ const RESEND_API_KEY = process.env.RESEND_API_KEY || 're_dummy_api_key_replace_w
 const RESEND_FROM_EMAIL = process.env.RESEND_FROM_EMAIL || 'noreply@mediweb.no';
 const RESEND_TO_CONTACT_EMAIL = process.env.RESEND_TO_CONTACT_EMAIL || 'post@mediweb.no';
 
-const resend = new Resend(RESEND_API_KEY);
+// Detect whether a real Resend API key is configured. The default fallback value
+// is a placeholder and should not be used for sending emails.
+const isResendConfigured = Boolean(RESEND_API_KEY) && !RESEND_API_KEY.startsWith('re_dummy');
+
+let resend: Resend | null = null;
+if (isResendConfigured) {
+	resend = new Resend(RESEND_API_KEY);
+} else {
+	// Warn during development so it's easier to spot misconfiguration
+	console.warn('RESEND_API_KEY is not set or is using the dummy placeholder. Email sending is disabled.');
+}
 
 export const actions: Actions = {
 	default: async ({ request }) => {
@@ -45,6 +55,16 @@ export const actions: Actions = {
 		if (Object.keys(errors).length > 0) {
 			return fail(400, {
 				errors,
+				data: { name, email, services, message }
+			});
+		}
+
+		// If Resend is not configured, return a helpful error instead of attempting
+		// to call the SDK which will fail with an unclear exception.
+		if (!isResendConfigured || !resend) {
+			console.error('Email sending is not configured. Set RESEND_API_KEY in your environment.');
+			return fail(500, {
+				error: 'E-postsending ikke konfigurert. Sett RESEND_API_KEY i miljøvariablene.',
 				data: { name, email, services, message }
 			});
 		}

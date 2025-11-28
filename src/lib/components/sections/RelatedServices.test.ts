@@ -76,7 +76,7 @@ describe('RelatedServices', () => {
 			} 
 		});
 
-		const serviceCards = screen.getAllByRole('button', { name: /Learn More/ });
+		const serviceCards = screen.getAllByRole('button', { name: /Les mer om/ });
 		expect(serviceCards).toHaveLength(2);
 	});
 
@@ -101,8 +101,8 @@ describe('RelatedServices', () => {
 			} 
 		});
 
-		const learnMoreButtons = screen.getAllByRole('button', { name: /Learn More/ });
-		expect(learnMoreButtons[0]).toHaveAttribute('href', '/services/medical-services');
+		const learnMoreButtons = screen.getAllByRole('button', { name: /Les mer om/ });
+		expect(learnMoreButtons[0]).toHaveAttribute('href', '/tjenester/medical-services');
 	});
 
 	it('displays main CTA button', () => {
@@ -113,8 +113,8 @@ describe('RelatedServices', () => {
 			} 
 		});
 
-		const ctaButton = screen.getByRole('button', { name: /Discuss Your Project/ });
-		expect(ctaButton).toHaveAttribute('href', '/contact');
+		const ctaButton = screen.getByRole('button', { name: /Kontakt oss for ditt neste prosjekt/ });
+		expect(ctaButton).toHaveAttribute('href', '/kontakt');
 	});
 
 	it('does not render when no related services', () => {
@@ -130,7 +130,7 @@ describe('RelatedServices', () => {
 			} 
 		});
 
-		expect(screen.queryByText('Explore Our Other Services')).not.toBeInTheDocument();
+		expect(screen.queryByText('Utforsk våre andre tjenester')).not.toBeInTheDocument();
 	});
 
 	it('has proper heading structure', () => {
@@ -141,7 +141,7 @@ describe('RelatedServices', () => {
 			} 
 		});
 
-		const mainHeading = screen.getByRole('heading', { level: 2, name: 'Explore Our Other Services' });
+		const mainHeading = screen.getByRole('heading', { level: 2, name: 'Utforsk våre andre tjenester' });
 		const serviceHeadings = screen.getAllByText('Medical Services');
 
 		expect(mainHeading).toBeInTheDocument();
