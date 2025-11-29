@@ -44,10 +44,10 @@ describe('ContactForm Component', () => {
 	it('has proper form labels', () => {
 		const { container } = render(ContactForm);
 		
-		expect(container.querySelector('label[for="name"]')).toHaveTextContent('Name');
-		expect(container.querySelector('label[for="email"]')).toHaveTextContent('Email');
-		expect(container.querySelector('label[for="service"]')).toHaveTextContent('Service Interest');
-		expect(container.querySelector('label[for="message"]')).toHaveTextContent('Message');
+		expect(container.querySelector('label[for="name"]')).toHaveTextContent('Navn');
+		expect(container.querySelector('label[for="email"]')).toHaveTextContent('E-postadresse');
+		expect(container.querySelector('legend')).toHaveTextContent('Velg tjeneste(r)');
+		expect(container.querySelector('label[for="message"]')).toHaveTextContent('Melding');
 	});
 
 	it('marks required fields with asterisk', () => {
@@ -61,7 +61,7 @@ describe('ContactForm Component', () => {
 		const { container } = render(ContactForm);
 		
 		const form = container.querySelector('form');
-		expect(form).toHaveAttribute('aria-label', 'Contact form');
+		expect(form).toHaveAttribute('aria-label', 'Kontaktskjema');
 		expect(form).toHaveAttribute('novalidate');
 		
 		const nameInput = container.querySelector('#name');
@@ -72,8 +72,8 @@ describe('ContactForm Component', () => {
 		expect(emailInput).toHaveAttribute('required');
 		expect(emailInput).toHaveAttribute('type', 'email');
 		
-		const serviceSelect = container.querySelector('#service');
-		expect(serviceSelect).toHaveAttribute('required');
+		const serviceCheckboxes = container.querySelectorAll('input[name="services"]');
+		expect(serviceCheckboxes.length).toBeGreaterThan(0);
 		
 		const messageTextarea = container.querySelector('#message');
 		expect(messageTextarea).toHaveAttribute('required');
@@ -86,10 +86,10 @@ describe('ContactForm Component', () => {
 		await fireEvent.click(submitButton!);
 		
 		await waitFor(() => {
-			expect(container.querySelector('#name-error')).toHaveTextContent('Name is required');
-			expect(container.querySelector('#email-error')).toHaveTextContent('Email is required');
-			expect(container.querySelector('#service-error')).toHaveTextContent('Please select a service');
-			expect(container.querySelector('#message-error')).toHaveTextContent('Message is required');
+			expect(container.querySelector('#name-error')).toHaveTextContent('Navn er påkrevd');
+			expect(container.querySelector('#email-error')).toHaveTextContent('E-post er påkrevd');
+			expect(container.querySelector('#services-error')).toHaveTextContent('Vennligst velg en eller flere tjenester');
+			expect(container.querySelector('#message-error')).toHaveTextContent('Melding er påkrevd');
 		});
 	});
 
@@ -103,7 +103,7 @@ describe('ContactForm Component', () => {
 		await fireEvent.click(submitButton!);
 		
 		await waitFor(() => {
-			expect(container.querySelector('#email-error')).toHaveTextContent('Please enter a valid email address');
+			expect(container.querySelector('#email-error')).toHaveTextContent('Vennligst skriv inn en gyldig e-postadresse');
 		});
 	});
 
@@ -120,8 +120,8 @@ describe('ContactForm Component', () => {
 		await fireEvent.click(submitButton!);
 		
 		await waitFor(() => {
-			expect(container.querySelector('#name-error')).toHaveTextContent('Name must be at least 2 characters');
-			expect(container.querySelector('#message-error')).toHaveTextContent('Message must be at least 10 characters');
+			expect(container.querySelector('#name-error')).toHaveTextContent('Navn må fylles ut og være minst 2 tegn');
+			expect(container.querySelector('#message-error')).toHaveTextContent('Du må fylle ut feltet med meldingen din');
 		});
 	});
 
@@ -131,24 +131,23 @@ describe('ContactForm Component', () => {
 		// Fill out form with valid data
 		const nameInput = container.querySelector('#name') as HTMLInputElement;
 		const emailInput = container.querySelector('#email') as HTMLInputElement;
-		const serviceSelect = container.querySelector('#service') as HTMLSelectElement;
+		const serviceCheckbox = container.querySelector('input[name="services"]') as HTMLInputElement;
 		const messageInput = container.querySelector('#message') as HTMLTextAreaElement;
 		
 		await fireEvent.input(nameInput, { target: { value: 'John Doe' } });
 		await fireEvent.input(emailInput, { target: { value: 'john@example.com' } });
-		await fireEvent.change(serviceSelect, { target: { value: 'web-development' } });
+		await fireEvent.click(serviceCheckbox);
 		await fireEvent.input(messageInput, { target: { value: 'This is a test message that is long enough.' } });
 		
 		// Verify no validation errors are shown
 		expect(container.querySelector('#name-error')).not.toBeInTheDocument();
 		expect(container.querySelector('#email-error')).not.toBeInTheDocument();
-		expect(container.querySelector('#service-error')).not.toBeInTheDocument();
+		expect(container.querySelector('#services-error')).not.toBeInTheDocument();
 		expect(container.querySelector('#message-error')).not.toBeInTheDocument();
 		
 		// Verify form fields have correct values
 		expect(nameInput.value).toBe('John Doe');
 		expect(emailInput.value).toBe('john@example.com');
-		expect(serviceSelect.value).toBe('web-development');
 		expect(messageInput.value).toBe('This is a test message that is long enough.');
 	});
 

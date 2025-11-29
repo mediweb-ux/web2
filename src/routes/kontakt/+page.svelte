@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
+	import { siteConfig } from '$lib/data/site-config';
 	import ContactForm from '$lib/components/ui/ContactForm.svelte';
 	import Section from '$lib/components/layout/Section.svelte';
 	import HeroSection from '$lib/components/sections/HeroSection.svelte';
@@ -17,20 +18,8 @@
 		}
 	});
 
-	// Contact information with structured data
-	const contactInfo = {
-		email: 'post@mediweb.no',
-		address: {
-			street: 'Lektor Musums gate 17',
-			city: 'Verdal',
-			zip: '7650',
-			country: 'Norge'
-		},
-		hours: {
-			weekdays: '9:00 AM - 6:00 PM',
-			weekend: 'Closed'
-		}
-	};
+	// Use contact information from site config
+	const contactInfo = siteConfig.contact;
 </script>
 
 <SEO

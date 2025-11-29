@@ -95,11 +95,41 @@ The built site will be in the `build/` directory, ready for deployment to any st
 
 ### Environment Variables
 
-Create `.env` files for different environments:
+The project uses environment variables for sensitive configuration. Create a `.env.local` file in the project root for local development.
 
-- `.env.local` - Local development
-- `.env.production` - Production settings
-- `.env.staging` - Staging environment
+**Available Variables:**
+
+```
+# Resend Email Service (required for contact form)
+RESEND_API_KEY=re_your_api_key_here
+RESEND_FROM_EMAIL=noreply@mediweb.no
+RESEND_TO_CONTACT_EMAIL=your-email@example.com
+
+# Google Analytics (optional)
+GA_MEASUREMENT_ID=G-XXXXXXXXXX
+```
+
+**Setup Instructions:**
+
+1. Copy `.env.example` to `.env.local`:
+   ```bash
+   cp .env.example .env.local
+   ```
+
+2. Get your Resend API key:
+   - Visit [https://resend.com/api-keys](https://resend.com/api-keys)
+   - Create a new API key
+   - Copy it to `RESEND_API_KEY` in `.env.local`
+
+3. Update contact email addresses:
+   - `RESEND_FROM_EMAIL`: Should match your verified domain in Resend
+   - `RESEND_TO_CONTACT_EMAIL`: Where contact form submissions are sent
+
+4. (Optional) Add Google Analytics:
+   - Get your Measurement ID from [Google Analytics](https://analytics.google.com/)
+   - Add it to `GA_MEASUREMENT_ID`
+
+**Important:** Never commit `.env.local` to version control. It's already in `.gitignore`.
 
 ## 🎨 Customization
 

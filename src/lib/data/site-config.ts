@@ -1,7 +1,7 @@
 export const siteConfig = {
 	name: 'MediWeb Solutions',
-	description: 'Professional agency offering web development, medical services, and educational courses. Modern solutions with accessibility and performance focus.',
-	url: 'https://mediweb',
+	description: 'Profesjonelle løsninger innen webutvikling, legetjenester og kursvirksomhet. Moderne løsninger med tilgjengelighet og høy grad av fokus på resultater.',
+	url: 'https://mediweb.no',
 	ogImage: '/og-image.jpg',
 	links: {
 		twitter: '',
@@ -14,7 +14,7 @@ export const siteConfig = {
 			street: 'Lektor Musums gate 17',
 			city: 'Verdal',
 			zip: '7650',
-			country: 'Verdal'
+			country: 'Norge'
 		}
 	},
 	services: [
@@ -26,7 +26,7 @@ export const siteConfig = {
 		{
 			name: 'Legetjenester',
 			slug: 'legetjenester', 
-			description: 'Profesjonelle legetjenester til ulike behov'
+			description: 'Profesjonelle legetjenester som dekker ulike behov'
 		},
 		{
 			name: 'Kursvirksomhet',

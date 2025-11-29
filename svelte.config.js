@@ -8,6 +8,11 @@ const config = {
 	preprocess: vitePreprocess(),
 
 	kit: {
+		// Environment variables configuration
+		env: {
+			publicPrefix: 'PUBLIC_'
+		},
+
 		// Static site generation configuration
 		adapter: adapter({
 			// Output directory for static files
