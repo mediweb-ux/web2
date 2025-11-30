@@ -83,9 +83,9 @@ export function parseHSLToRGB(hslString: string): [number, number, number] {
 		throw new Error(`Invalid HSL format: ${hslString}`);
 	}
 	
-	const h = parseInt(matches[1]);
-	const s = parseInt(matches[2]);
-	const l = parseInt(matches[3]);
+	const h = parseInt(matches[1]!);
+	const s = parseInt(matches[2]!);
+	const l = parseInt(matches[3]!);
 	
 	return hslToRgb(h, s, l);
 }

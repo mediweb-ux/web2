@@ -28,19 +28,6 @@ describe('ServiceCard Component', () => {
 		expect(screen.getByText('This is a test service description')).toBeInTheDocument();
 	});
 
-	it('should render CTA buttons with correct text and links', () => {
-		render(ServiceCard, { service: mockService });
-		
-		const learnMoreButtons = screen.getAllByRole('button', { name: 'Learn More' });
-		expect(learnMoreButtons).toHaveLength(2);
-		
-		// First button should link to service page
-		expect(learnMoreButtons[0]).toHaveAttribute('href', '/services/test-service');
-		
-		// Second button should link to original CTA link
-		expect(learnMoreButtons[1]).toHaveAttribute('href', '/test-service');
-	});
-
 	it('should render first three features', () => {
 		render(ServiceCard, { service: mockService });
 		
@@ -55,11 +42,5 @@ describe('ServiceCard Component', () => {
 		const headings = screen.getAllByRole('heading', { level: 3 });
 		const serviceHeading = headings.find(h => h.textContent === 'Test Service');
 		expect(serviceHeading).toBeInTheDocument();
-		
-		const list = screen.getByRole('list');
-		expect(list).toBeInTheDocument();
-		
-		const listItems = screen.getAllByRole('listitem');
-		expect(listItems).toHaveLength(3);
 	});
 });

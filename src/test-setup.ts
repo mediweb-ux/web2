@@ -182,27 +182,41 @@ Object.defineProperty(globalThis, 'matchMedia', {
 	})
 });
 
-// Mock IntersectionObserver for lazy loading tests
-globalThis.IntersectionObserver = vi.fn().mockImplementation((_callback: any) => {
-	return {
-		observe: vi.fn(),
-		unobserve: vi.fn(),
-		disconnect: vi.fn(),
-		takeRecords: vi.fn(() => []),
-		root: null,
-		rootMargin: '0px',
-		thresholds: [0]
+// If no test provides an IntersectionObserver mock, give a safe default so
+// code that relies on construction doesn't crash. Individual tests should
+// mock `global.IntersectionObserver` or `global.window.IntersectionObserver`
+// locally (they already do) — in that case this global will be overridden.
+if (!(globalThis as any).IntersectionObserver) {
+	(globalThis as any).IntersectionObserver = class {
+		callback: any;
+		root: any = null;
+		rootMargin: string = '0px';
+		thresholds: number[] = [0];
+
+		constructor(callback: any) {
+			this.callback = callback;
+			// spyable instance methods
+			(this as any).observe = vi.fn();
+			(this as any).unobserve = vi.fn();
+			(this as any).disconnect = vi.fn();
+			(this as any).takeRecords = vi.fn(() => []);
+		}
 	};
-});
+}
 
 // Mock ResizeObserver for responsive components
-globalThis.ResizeObserver = vi.fn().mockImplementation((_callback: any) => {
-	return {
-		observe: vi.fn(),
-		unobserve: vi.fn(),
-		disconnect: vi.fn()
+// Provide a constructable ResizeObserver mock with spyable methods
+if (!(globalThis as any).ResizeObserver) {
+	(globalThis as any).ResizeObserver = class {
+		callback: any;
+		constructor(callback: any) {
+			this.callback = callback;
+			(this as any).observe = vi.fn();
+			(this as any).unobserve = vi.fn();
+			(this as any).disconnect = vi.fn();
+		}
 	};
-});
+}
 
 // Mock requestAnimationFrame and cancelAnimationFrame
 globalThis.requestAnimationFrame = vi.fn((callback: any) => {
@@ -298,45 +312,33 @@ if (typeof (globalThis as any).HTMLCanvasElement !== 'undefined') {
 	(globalThis as any).HTMLCanvasElement.prototype.toDataURL = vi.fn().mockReturnValue('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==');
 }
 
-// Mock theme stores for testing
-vi.mock('$lib/stores/theme', () => {
-	const { writable } = require('svelte/store');
-	
-	const mockTheme = writable('light');
-	
-	return {
-		theme: {
-			subscribe: mockTheme.subscribe,
-			init: vi.fn(() => vi.fn()), // Return cleanup function
-			toggle: vi.fn(),
-			setTheme: vi.fn(),
-			clearPreference: vi.fn()
-		},
-		getCurrentTheme: vi.fn(() => 'light'),
-		prefersReducedMotion: vi.fn(() => false)
-	};
-});
-
-vi.mock('$lib/stores', () => {
-	const { writable } = require('svelte/store');
-	
-	const mockTheme = writable('light');
-	const mockReducedMotion = writable(false);
-	
-	return {
-		theme: {
-			subscribe: mockTheme.subscribe,
-			init: vi.fn(() => vi.fn()), // Return cleanup function
-			toggle: vi.fn(),
-			setTheme: vi.fn(),
-			clearPreference: vi.fn()
-		},
-		prefersReducedMotion: {
-			subscribe: mockReducedMotion.subscribe,
-			init: vi.fn(() => vi.fn()) // Return cleanup function
+// Polyfill getComputedStyle to accept pseudo-element parameter used by axe-core
+// jsdom's getComputedStyle may not accept the second argument, axe-core calls
+// it with pseudo elements which throws. Wrap the original to ignore the
+// pseudo-element parameter and return a compatible object.
+const _origGetComputedStyle = (globalThis as any).getComputedStyle;
+(globalThis as any).getComputedStyle = (elt: Element, pseudoElt?: string | null) => {
+	if (typeof _origGetComputedStyle === 'function') {
+		try {
+			// Call original without pseudoElt to avoid Not implemented error
+			const result = _origGetComputedStyle.call(globalThis, elt);
+			// Ensure there's a getPropertyValue function (axe expects this)
+			if (typeof (result as any).getPropertyValue !== 'function') {
+				return { getPropertyValue: () => '', ...result };
+			}
+			return result;
+		} catch (e) {
+			// Fallback minimal implementation
+			return { getPropertyValue: (_: string) => '' } as any;
 		}
-	};
-});
+	}
+	return { getPropertyValue: (_: string) => '' } as any;
+};
+
+// NOTE: Do not mock $lib/stores or $lib/stores/theme here — tests should exercise
+// the real theme store implementation to validate behavior. If specific tests
+// need to mock parts of the store, they should do so locally in the test file.
+
 
 // Ensure all browser globals are properly set for Svelte 5 detection
 Object.defineProperty(globalThis, 'window', {

@@ -187,8 +187,7 @@
 					on:mouseenter={handleDropdownEnter}
 					on:mouseleave={handleDropdownLeave}
 					class="relative"
-					role="button"
-					tabindex="0"
+					role="presentation"
 				>
 					<button
 						type="button"

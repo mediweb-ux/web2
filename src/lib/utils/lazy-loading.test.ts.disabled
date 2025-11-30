@@ -64,7 +64,7 @@ describe('Lazy Loading Utils', () => {
 	describe('createLazyObserver', () => {
 		it('should create IntersectionObserver with default options', () => {
 			const callback = vi.fn();
-			const observer = createLazyObserver(callback);
+			const observer = createLazyObserver(callback, undefined, mockIntersectionObserver);
 
 			expect(mockIntersectionObserver).toHaveBeenCalledWith(
 				expect.any(Function),
@@ -84,7 +84,7 @@ describe('Lazy Loading Utils', () => {
 				once: false
 			};
 
-			createLazyObserver(callback, options);
+			createLazyObserver(callback, options, mockIntersectionObserver);
 
 			expect(mockIntersectionObserver).toHaveBeenCalledWith(
 				expect.any(Function),
@@ -106,7 +106,7 @@ describe('Lazy Loading Utils', () => {
 
 		it('should call callback when element intersects', () => {
 			const callback = vi.fn();
-			createLazyObserver(callback);
+			createLazyObserver(callback, undefined, mockIntersectionObserver);
 
 			// Simulate intersection
 			const mockEntry = {
@@ -126,7 +126,7 @@ describe('Lazy Loading Utils', () => {
 
 		it('should unobserve element after first intersection when once is true', () => {
 			const callback = vi.fn();
-			createLazyObserver(callback, { once: true });
+			createLazyObserver(callback, { once: true }, mockIntersectionObserver);
 
 			const mockEntry = {
 				isIntersecting: true,
@@ -145,14 +145,14 @@ describe('Lazy Loading Utils', () => {
 
 	describe('lazyLoadImage', () => {
 		it('should set up lazy loading for image', () => {
-			const cleanup = lazyLoadImage(mockImage as any);
+			const cleanup = lazyLoadImage(mockImage as any, undefined, mockIntersectionObserver);
 
 			expect(mockObserve).toHaveBeenCalledWith(mockImage);
 			expect(typeof cleanup).toBe('function');
 		});
 
 		it('should load image when intersecting', () => {
-			lazyLoadImage(mockImage as any);
+			lazyLoadImage(mockImage as any, undefined, mockIntersectionObserver);
 
 			// Simulate intersection
 			const mockEntry = {
@@ -187,14 +187,14 @@ describe('Lazy Loading Utils', () => {
 
 	describe('lazyLoadContent', () => {
 		it('should set up lazy loading for content element', () => {
-			const cleanup = lazyLoadContent(mockElement as any);
+			const cleanup = lazyLoadContent(mockElement as any, undefined, mockIntersectionObserver);
 
 			expect(mockObserve).toHaveBeenCalledWith(mockElement);
 			expect(typeof cleanup).toBe('function');
 		});
 
 		it('should dispatch lazy-load event when intersecting', () => {
-			lazyLoadContent(mockElement as any);
+			lazyLoadContent(mockElement as any, undefined, mockIntersectionObserver);
 
 			const mockEntry = {
 				isIntersecting: true,

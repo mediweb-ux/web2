@@ -9,7 +9,7 @@ vi.mock('$app/stores', () => ({
 			callback({
 				url: new URL('http://localhost:3000/contact'),
 				params: {},
-				route: { id: '/contact' }
+				route: { id: '/kontakt' }
 			});
 			return () => {};
 		})

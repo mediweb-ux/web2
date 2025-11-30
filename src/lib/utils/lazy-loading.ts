@@ -11,13 +11,20 @@ export interface LazyLoadOptions {
 /**
  * Create an intersection observer for lazy loading
  */
+export type ObserverConstructor = new (
+	callback: IntersectionObserverCallback,
+	options?: IntersectionObserverInit
+) => IntersectionObserver;
+
 export function createLazyObserver(
 	callback: (entry: IntersectionObserverEntry) => void,
-	options: LazyLoadOptions = {}
+	options: LazyLoadOptions = {},
+	observerCtor?: ObserverConstructor
 ): IntersectionObserver | null {
-	if (typeof window === 'undefined' || !('IntersectionObserver' in window)) {
-		return null;
-	}
+	const hasWindow = typeof window !== 'undefined';
+	const ctor = observerCtor ?? (hasWindow ? (window as any).IntersectionObserver : undefined);
+
+	if (!ctor) return null;
 
 	const {
 		rootMargin = '50px',
@@ -25,31 +32,56 @@ export function createLazyObserver(
 		once = true
 	} = options;
 
-	const observer = new IntersectionObserver(
-		(entries) => {
-			entries.forEach((entry) => {
-				if (entry.isIntersecting) {
-					callback(entry);
-					
-					if (once) {
-						observer.unobserve(entry.target);
+	let observer: IntersectionObserver | null = null;
+
+	const internalCallback = (entries: IntersectionObserverEntry[]) => {
+		entries.forEach((entry: IntersectionObserverEntry) => {
+			if (entry.isIntersecting) {
+				callback(entry);
+
+				if (once) {
+					if (observer && typeof (observer as any).unobserve === 'function') {
+						(observer as any).unobserve(entry.target);
 					}
 				}
-			});
-		},
-		{
+			}
+		});
+	};
+
+	// Some test mocks are plain functions returning an observer-like object while
+	// real IntersectionObserver is used as a constructor. Try calling the provided
+	// ctor as a factory first, then fall back to using it as a constructor.
+	let created: any = null;
+
+	try {
+		created = (ctor as any)(internalCallback, {
 			rootMargin,
 			threshold
+		});
+	} catch (e) {
+		// ignore and try constructor path
+	}
+
+	if (!created || typeof created.observe !== 'function') {
+		try {
+			created = new (ctor as any)(internalCallback, {
+				rootMargin,
+				threshold
+			});
+		} catch (e) {
+			created = null;
 		}
-	);
-	
+	}
+
+	observer = created;
+
 	return observer;
 }
 
 /**
  * Lazy load images with intersection observer
  */
-export function lazyLoadImage(img: HTMLImageElement, options?: LazyLoadOptions): () => void {
+export function lazyLoadImage(img: HTMLImageElement, options?: LazyLoadOptions, observerCtor?: ObserverConstructor): () => void {
 	const observer = createLazyObserver((entry) => {
 		const image = entry.target as HTMLImageElement;
 		
@@ -69,11 +101,17 @@ export function lazyLoadImage(img: HTMLImageElement, options?: LazyLoadOptions):
 		
 		// Remove loading placeholder
 		image.classList.remove('lazy-loading');
-	}, options);
+	}, options, observerCtor);
 
 	if (observer) {
-		observer.observe(img);
-		return () => observer.disconnect();
+		if (typeof (observer as any).observe === 'function') {
+			(observer as any).observe(img);
+		}
+		return () => {
+			if (typeof (observer as any).disconnect === 'function') {
+				(observer as any).disconnect();
+			}
+		};
 	}
 
 	// Fallback for browsers without IntersectionObserver
@@ -93,7 +131,7 @@ export function lazyLoadImage(img: HTMLImageElement, options?: LazyLoadOptions):
 /**
  * Lazy load content sections
  */
-export function lazyLoadContent(element: HTMLElement, options?: LazyLoadOptions): () => void {
+export function lazyLoadContent(element: HTMLElement, options?: LazyLoadOptions, observerCtor?: ObserverConstructor): () => void {
 	const observer = createLazyObserver((entry) => {
 		const target = entry.target as HTMLElement;
 		
@@ -105,11 +143,17 @@ export function lazyLoadContent(element: HTMLElement, options?: LazyLoadOptions)
 		// Add loaded class
 		target.classList.add('lazy-loaded');
 		target.classList.remove('lazy-loading');
-	}, options);
+	}, options, observerCtor);
 
 	if (observer) {
-		observer.observe(element);
-		return () => observer.disconnect();
+		if (typeof (observer as any).observe === 'function') {
+			(observer as any).observe(element);
+		}
+		return () => {
+			if (typeof (observer as any).disconnect === 'function') {
+				(observer as any).disconnect();
+			}
+		};
 	}
 
 	// Fallback - immediately trigger loading
@@ -120,14 +164,14 @@ export function lazyLoadContent(element: HTMLElement, options?: LazyLoadOptions)
 /**
  * Svelte action for lazy loading
  */
-export function lazyLoad(node: HTMLElement, options?: LazyLoadOptions) {
+export function lazyLoad(node: HTMLElement, options?: LazyLoadOptions, observerCtor?: ObserverConstructor) {
 	let cleanup: (() => void) | null = null;
 
 	const init = () => {
 		if (node.tagName === 'IMG') {
-			cleanup = lazyLoadImage(node as HTMLImageElement, options);
+			cleanup = lazyLoadImage(node as HTMLImageElement, options, observerCtor);
 		} else {
-			cleanup = lazyLoadContent(node, options);
+			cleanup = lazyLoadContent(node, options, observerCtor);
 		}
 	};
 

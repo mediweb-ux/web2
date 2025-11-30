@@ -10,7 +10,9 @@ vi.mock('$lib/stores', () => ({
 			return vi.fn();
 		}),
 		init: vi.fn(() => vi.fn()),
-		toggle: vi.fn()
+		toggle: vi.fn(),
+		setTheme: vi.fn(),
+		clearPreference: vi.fn()
 	},
 	prefersReducedMotion: {
 		subscribe: vi.fn((callback) => {

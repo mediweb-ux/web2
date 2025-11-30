@@ -14,8 +14,8 @@ function createThemeStore() {
 		init: () => {
 			if (!browser) return;
 			
-			const stored = localStorage.getItem('theme') as Theme | null;
-			const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+			const stored = globalThis.localStorage?.getItem('theme') as Theme | null;
+			const systemPrefersDark = globalThis.matchMedia?.('(prefers-color-scheme: dark)')?.matches ?? false;
 			
 			const initialTheme = stored || (systemPrefersDark ? 'dark' : 'light');
 			
@@ -23,21 +23,21 @@ function createThemeStore() {
 			applyTheme(initialTheme);
 			
 			// Listen for system theme changes
-			const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+			const mediaQuery = globalThis.matchMedia?.('(prefers-color-scheme: dark)');
 			const handleSystemThemeChange = (e: MediaQueryListEvent) => {
 				// Only update if user hasn't set a preference
-				if (!localStorage.getItem('theme')) {
+				if (!globalThis.localStorage?.getItem('theme')) {
 					const newTheme = e.matches ? 'dark' : 'light';
 					set(newTheme);
 					applyTheme(newTheme);
 				}
 			};
 			
-			mediaQuery.addEventListener('change', handleSystemThemeChange);
+			mediaQuery?.addEventListener('change', handleSystemThemeChange);
 			
 			// Return cleanup function
 			return () => {
-				mediaQuery.removeEventListener('change', handleSystemThemeChange);
+				mediaQuery?.removeEventListener('change', handleSystemThemeChange);
 			};
 		},
 		
@@ -47,7 +47,7 @@ function createThemeStore() {
 				const newTheme = currentTheme === 'light' ? 'dark' : 'light';
 				
 				if (browser) {
-					localStorage.setItem('theme', newTheme);
+					globalThis.localStorage?.setItem('theme', newTheme);
 					applyTheme(newTheme);
 				}
 				
@@ -60,7 +60,7 @@ function createThemeStore() {
 			set(theme);
 			
 			if (browser) {
-				localStorage.setItem('theme', theme);
+				globalThis.localStorage?.setItem('theme', theme);
 				applyTheme(theme);
 			}
 		},
@@ -68,11 +68,11 @@ function createThemeStore() {
 		// Clear stored preference (use system preference)
 		clearPreference: () => {
 			if (!browser) return;
-			
-			localStorage.removeItem('theme');
-			const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+		
+			globalThis.localStorage?.removeItem('theme');
+			const systemPrefersDark = globalThis.matchMedia?.('(prefers-color-scheme: dark)')?.matches ?? false;
 			const systemTheme = systemPrefersDark ? 'dark' : 'light';
-			
+		
 			set(systemTheme);
 			applyTheme(systemTheme);
 		}

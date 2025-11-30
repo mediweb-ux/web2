@@ -1,3 +1,3 @@
-// Store exports - use the main stores.ts file
-export { theme, prefersReducedMotion } from '../stores';
-export type { Theme } from '../stores';
+// Store exports - re-export from the theme implementation
+export { theme, prefersReducedMotion } from './theme';
+export type { Theme } from './theme';

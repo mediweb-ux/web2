@@ -19,7 +19,7 @@
 		"noImplicitOverride": true,
 		"target": "ES2022",
 		"lib": ["ES2022", "DOM", "DOM.Iterable"],
-		"types": ["vitest/globals", "@testing-library/jest-dom", "node"]
+		"types": ["vitest", "vitest/globals", "@testing-library/jest-dom", "node"]
 	},
 	"include": [
 		"src/**/*.d.ts",
@@ -34,7 +34,13 @@
 		"src/types/vitest.d.ts",
 		"vitest.config.ts"
 	],
-	"exclude": ["node_modules/**", ".svelte-kit/**", "build/**"]
+	"exclude": [
+		"node_modules/**",
+		".svelte-kit/**",
+		"build/**",
+		"**/*.test.*",
+		"src/mocks/**"
+	]
 	// Path aliases are handled by https://svelte.dev/docs/kit/configuration#alias
 	// except $lib which is handled by https://svelte.dev/docs/kit/configuration#files
 }

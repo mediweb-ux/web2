@@ -54,7 +54,7 @@
 				<div class="space-y-6">
 					<!-- Email -->
 					<div class="flex items-start space-x-4">
-						<div class="flex-shrink-0">
+						<div class="shrink-0">
 							<svg
 								class="w-6 h-6 text-primary"
 								fill="none"
@@ -123,7 +123,7 @@
 					<ul class="space-y-2 text-muted-foreground">
 						<li class="flex items-start space-x-2">
 							<svg
-								class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0"
+								class="w-5 h-5 text-green-500 mt-0.5 shrink-0"
 								fill="currentColor"
 								viewBox="0 0 20 20"
 								aria-hidden="true"
@@ -138,7 +138,7 @@
 						</li>
 						<li class="flex items-start space-x-2">
 							<svg
-								class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0"
+								class="w-5 h-5 text-green-500 mt-0.5 shrink-0"
 								fill="currentColor"
 								viewBox="0 0 20 20"
 								aria-hidden="true"
@@ -153,7 +153,7 @@
 						</li>
 						<li class="flex items-start space-x-2">
 							<svg
-								class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0"
+								class="w-5 h-5 text-green-500 mt-0.5 shrink-0"
 								fill="currentColor"
 								viewBox="0 0 20 20"
 								aria-hidden="true"

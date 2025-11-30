@@ -23,6 +23,8 @@ vi.mock('$lib/stores', () => ({
 			return () => {};
 		}),
 		toggle: vi.fn(),
+		setTheme: vi.fn(),
+		clearPreference: vi.fn(),
 		set: vi.fn(),
 		init: vi.fn()
 	}
