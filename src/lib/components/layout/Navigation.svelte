@@ -97,7 +97,7 @@
 
 <svelte:window on:click={handleClickOutside} on:keydown={handleDropdownKeydown} />
 
-<nav aria-label={mobile ? 'Mobil navigasjon' : 'Navigasjon'}>
+<nav class="not-prose" aria-label={mobile ? 'Mobil navigasjon' : 'Navigasjon'}>
 	<ul class={mobile ? 'flex flex-col space-y-1' : 'flex items-center space-x-8'}>
 		<!-- Home -->
 		<li>
@@ -108,7 +108,7 @@
 					${
 						mobile
 							? 'block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200'
-							: 'text-sm font-medium transition-colors duration-200'
+							: 'inline-flex items-center text-sm font-medium transition-colors duration-200'
 					}
 					${
 						isCurrentPage('/')
@@ -262,7 +262,7 @@
 					${
 						mobile
 							? 'block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200'
-							: 'text-sm font-medium transition-colors duration-200'
+							: 'inline-flex items-center text-sm font-medium transition-colors duration-200'
 					}
 					${
 						isCurrentPage('/om-oss')
@@ -292,7 +292,7 @@
 					${
 						mobile
 							? 'block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200'
-							: 'text-sm font-medium transition-colors duration-200'
+							: 'inline-flex items-center text-sm font-medium transition-colors duration-200'
 					}
 					${
 						isCurrentPage('/kontakt')

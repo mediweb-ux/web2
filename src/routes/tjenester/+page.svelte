@@ -65,7 +65,7 @@
 							<ul class="space-y-2">
 								{#each service.features.slice(0, 4) as feature}
 									<li class="flex items-center text-body-sm text-muted-foreground">
-										<span class="text-primary mr-2 flex-shrink-0">
+										<span class="text-primary mr-2 shrink-0">
 											<Icon name="check" size="sm" />
 										</span>
 										{feature.title}

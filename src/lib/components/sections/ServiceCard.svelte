@@ -9,13 +9,13 @@
 
 <Card class="h-full flex flex-col">
 	<div class="flex items-center gap-4 mb-4">
-		<div class="flex-shrink-0">
+		<div class="shrink-0">
 			<Icon name={service.icon} size="lg" class="text-primary" />
 		</div>
 		<h3 class="text-heading-lg font-semibold text-foreground">{service.title}</h3>
 	</div>
 	
-	<p class="text-muted-foreground mb-6 flex-grow">
+	<p class="text-muted-foreground mb-6 grow">
 		{service.description}
 	</p>
 	
@@ -24,7 +24,7 @@
 		<ul class="space-y-2">
 			{#each service.features.slice(0, 3) as feature}
 				<li class="flex items-start gap-2 text-body-sm text-muted-foreground">
-					<Icon name="check" size="sm" class="text-primary mt-0.5 flex-shrink-0" />
+					<Icon name="check" size="sm" class="text-primary mt-0.5 shrink-0" />
 					<span>{feature.title}</span>
 				</li>
 			{/each}

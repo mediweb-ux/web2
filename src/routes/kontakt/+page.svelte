@@ -84,7 +84,7 @@
 
 					<!-- Address -->
 					<div class="flex items-start space-x-4">
-						<div class="flex-shrink-0">
+						<div class="shrink-0">
 							<svg
 								class="w-6 h-6 text-primary"
 								fill="none"
