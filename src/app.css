@@ -1,6 +1,5 @@
-/* Tailwind: include the core layers in the recommended order. */
-@tailwind base;
-@tailwind components;
+/* Tailwind v4: import preflight and include utilities. */
+@import "tailwindcss/preflight";
 @tailwind utilities;
 
 /* Tailwind CSS configuration mapping to HSL variables for compatibility */
