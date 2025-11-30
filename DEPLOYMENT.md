@@ -95,18 +95,6 @@ Some hosting providers (or build systems like Nixpacks) generate a Dockerfile fr
 
 Adding `Dockerfile.deploy` or instructing the host to use the repo Dockerfile prevents host-generated Dockerfiles from invoking `pnpm` before it's installed.
 
-### Quick bootstrap script (defensive)
-
-If you cannot point the provider to `Dockerfile.deploy` and cannot clear the provider cache, you can instruct the host to run a small bootstrap script before the host's install step. The repo includes `scripts/bootstrap-install-pnpm.sh` which will attempt to enable/install `pnpm` safely.
-
-Recommended build command (set in host build settings):
-
-```bash
-bash ./scripts/bootstrap-install-pnpm.sh && pnpm install --frozen-lockfile && pnpm run build
-```
-
-This ensures `pnpm` is available before `pnpm install` is run and prevents the `pnpm: command not found` error in hosts that execute `pnpm install` early in their generated Dockerfile.
-
 ### Static Hosting (Netlify, Vercel, etc.)
 
 1. Build the project:
