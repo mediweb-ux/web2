@@ -86,6 +86,15 @@ docker build -t mediweb-svelte .
 docker run -p 3000:3000 mediweb-svelte
 ```
 
+#### If your host auto-generates a Dockerfile
+
+Some hosting providers (or build systems like Nixpacks) generate a Dockerfile from `nixpacks.toml` or their own templates. If your deployment logs show errors like `pnpm: command not found` or `UndefinedVar: $NIXPACKS_PATH`, prefer using the repository Dockerfile to avoid mismatches:
+
+- Option A: Configure your host to use `Dockerfile.deploy` (this repo includes that file which mirrors the tested Dockerfile).
+- Option B: Clear the host build cache and re-run the build so it picks up recent `nixpacks.toml` changes.
+
+Adding `Dockerfile.deploy` or instructing the host to use the repo Dockerfile prevents host-generated Dockerfiles from invoking `pnpm` before it's installed.
+
 ### Static Hosting (Netlify, Vercel, etc.)
 
 1. Build the project:
