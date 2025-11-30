@@ -1,7 +1,9 @@
-@import "tailwindcss";
+/* Tailwind v4: import preflight and include utilities. */
+@import "tailwindcss/preflight";
+@tailwind utilities;
 
-/* Tailwind CSS 4 Configuration - Map to HSL variables for compatibility */
-@theme {
+/* Tailwind CSS configuration mapping to HSL variables for compatibility */
+:root {
   --color-primary: hsl(var(--primary));
   --color-primary-foreground: hsl(var(--primary-foreground));
   --color-secondary: hsl(var(--secondary));

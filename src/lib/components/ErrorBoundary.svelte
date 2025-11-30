@@ -134,7 +134,7 @@
 
 			<p class="error-help">
 				If this problem persists, please 
-				<a href="/contact" class="error-link">contact us</a> 
+				<a href="/kontakt" class="error-link">contact us</a> 
 				for assistance.
 			</p>
 		</div>

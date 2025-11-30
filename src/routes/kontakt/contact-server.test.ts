@@ -8,7 +8,7 @@ describe('Contact Form Server Action', () => {
 		formData.append('email', '');
 		formData.append('message', '');
 
-		const request = new Request('http://localhost:3000/contact', {
+		const request = new Request('http://localhost:3000/kontakt', {
 			method: 'POST',
 			body: formData
 		});
@@ -36,7 +36,7 @@ describe('Contact Form Server Action', () => {
 		formData.append('email', 'invalid-email');
 		formData.append('message', 'This is a test message that is long enough.');
 
-		const request = new Request('http://localhost:3000/contact', {
+		const request = new Request('http://localhost:3000/kontakt', {
 			method: 'POST',
 			body: formData
 		});
@@ -59,7 +59,7 @@ describe('Contact Form Server Action', () => {
 		formData.append('email', 'john@example.com');
 		formData.append('message', 'Short');
 
-		const request = new Request('http://localhost:3000/contact', {
+		const request = new Request('http://localhost:3000/kontakt', {
 			method: 'POST',
 			body: formData
 		});
@@ -82,7 +82,7 @@ describe('Contact Form Server Action', () => {
 		formData.append('email', 'john@example.com');
 		formData.append('message', 'This is a test message that is long enough for validation.');
 
-		const request = new Request('http://localhost:3000/contact', {
+		const request = new Request('http://localhost:3000/kontakt', {
 			method: 'POST',
 			body: formData
 		});
@@ -109,7 +109,7 @@ describe('Contact Form Server Action', () => {
 		formData.append('email', '  john@example.com  ');
 		formData.append('message', '  This is a test message that is long enough for validation.  ');
 
-		const request = new Request('http://localhost:3000/contact', {
+		const request = new Request('http://localhost:3000/kontakt', {
 			method: 'POST',
 			body: formData
 		});

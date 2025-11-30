@@ -7,7 +7,7 @@ describe('Hero Component', () => {
 		title: 'Test Title',
 		subtitle: 'Test Subtitle',
 		ctaText: 'Get Started',
-		ctaLink: '/contact'
+		ctaLink: '/kontakt'
 	};
 
 	it('renders title and subtitle correctly', () => {
@@ -22,7 +22,7 @@ describe('Hero Component', () => {
 		
 		const ctaButton = screen.getByRole('button', { name: 'Get Started' });
 		expect(ctaButton).toBeInTheDocument();
-		expect(ctaButton).toHaveAttribute('href', '/contact');
+		expect(ctaButton).toHaveAttribute('href', '/kontakt');
 	});
 
 	it('renders secondary CTA when provided', () => {

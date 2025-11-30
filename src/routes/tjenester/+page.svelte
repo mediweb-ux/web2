@@ -96,7 +96,7 @@
 			i dag, s&aring; snakkes vi!
 		</p>
 		<div class="flex flex-col sm:flex-row gap-4 justify-center">
-			<Button href="/contact" variant="primary" size="lg">
+			<Button href="/kontakt" variant="primary" size="lg">
 				Start ditt prosjekt
 				<span class="ml-2">
 					<Icon name="arrow-right" size="sm" />

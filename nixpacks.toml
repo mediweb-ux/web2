@@ -1,11 +1,15 @@
 [phases.setup]
 nixPkgs = ["nodejs_20", "npm-9_x"]
+cmds = ["corepack enable", "corepack prepare pnpm@latest --activate"]
 
 [phases.install]
-cmds = ["npm ci"]
+cmds = ["pnpm install --frozen-lockfile"]
 
 [phases.build]
 cmds = ["npm run build"]
 
 [start]
 cmd = "npx serve build -s -l 3000"
+
+[env]
+NIXPACKS_PATH = "/app/node_modules/.bin"

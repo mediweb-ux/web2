@@ -18,7 +18,7 @@ const mockServices: Service[] = [
 		],
 		portfolio: [],
 		ctaText: 'Start Project',
-		ctaLink: '/contact'
+		ctaLink: '/kontakt'
 	},
 	{
 		id: 'medical-services',
@@ -34,7 +34,7 @@ const mockServices: Service[] = [
 		],
 		portfolio: [],
 		ctaText: 'Discuss Needs',
-		ctaLink: '/contact'
+		ctaLink: '/kontakt'
 	},
 	{
 		id: 'courses',
@@ -50,7 +50,7 @@ const mockServices: Service[] = [
 		],
 		portfolio: [],
 		ctaText: 'Build Platform',
-		ctaLink: '/contact'
+		ctaLink: '/kontakt'
 	}
 ];
 

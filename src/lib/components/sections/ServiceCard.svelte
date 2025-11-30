@@ -32,7 +32,7 @@
 	</div>
 	
 	<div class="mt-auto space-y-3">
-		<Button href="/services/{service.slug}" variant="primary" class="w-full">
+		<Button href={`/tjenester/${service.slug}`} variant="primary" class="w-full">
 			Mer om {service.title}
 			<Icon name="arrow-right" size="sm" class="ml-2" />
 		</Button>

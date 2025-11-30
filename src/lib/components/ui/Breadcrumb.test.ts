@@ -6,7 +6,7 @@ describe('Breadcrumb', () => {
 	const mockItems = [
 		{ label: 'Home', href: '/' },
 		{ label: 'Services', href: '/services' },
-		{ label: 'Web Development', href: '/services/web-development', current: true }
+		{ label: 'Web Development', href: '/tjenester/web-development', current: true }
 	];
 
 	it('renders breadcrumb items correctly', () => {
