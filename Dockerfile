@@ -1,34 +1,39 @@
 # Use Node.js 20 Alpine for smaller image size
 FROM node:20-alpine AS builder
 
-# Set working directory
+# Use a non-root working directory for builds
 WORKDIR /app
 
-# Copy package files
-COPY package*.json ./
+# Install pnpm globally so we can use the workspace's lockfile reliably
+RUN npm install -g pnpm@10.24.0
 
-# Install dependencies
-RUN npm ci
+# Copy only package manifests and lockfile first to leverage layer caching
+COPY package.json pnpm-lock.yaml* ./
 
-# Copy source code
+# Install dependencies (includes dev deps needed for building)
+RUN pnpm install
+
+# Copy the rest of the source and build
 COPY . .
+RUN pnpm run build
 
-# Build the application
-RUN npm run build
-
-# Production stage
+# Production stage: smaller runtime image
 FROM node:20-alpine AS runner
 
-# Install serve globally
-RUN npm install -g serve@14.2.3
-
-# Set working directory
+# Create app directory and use non-root user
 WORKDIR /app
 
-# Copy built application from builder stage
+# Install a tiny static server globally (used to serve the built SPA)
+RUN npm install -g serve@14.2.3
+
+# Copy built artifacts from builder
 COPY --from=builder /app/build ./build
 
-# Expose port
+# Use the non-root 'node' user provided by the official image
+USER node
+
+# Expose port and set a sensible NODE_ENV
+ENV NODE_ENV=production
 EXPOSE 3000
 
 # Start the application with proper SPA configuration

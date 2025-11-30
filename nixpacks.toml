@@ -1,12 +1,19 @@
 [phases.setup]
 nixPkgs = ["nodejs_20", "npm-9_x"]
-cmds = ["corepack enable", "corepack prepare pnpm@latest --activate"]
+# Ensure a sane default for NIXPACKS_PATH during image generation and
+# install a stable pnpm globally instead of relying on corepack.prepare,
+# which can fail in some build environments.
+cmds = [
+	"export NIXPACKS_PATH=/app/node_modules/.bin",
+	"npm install -g pnpm@10.24.0"
+]
 
 [phases.install]
 cmds = ["pnpm install --frozen-lockfile"]
 
 [phases.build]
-cmds = ["npm run build"]
+# Use pnpm explicitly for the build phase to match the repo's lockfile.
+cmds = ["pnpm run build"]
 
 [start]
 cmd = "npx serve build -s -l 3000"
